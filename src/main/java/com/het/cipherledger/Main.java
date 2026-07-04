@@ -1,17 +1,21 @@
 package com.het.cipherledger;
 
-import com.het.cipherledger.crypto.HashUtil;
+import com.het.cipherledger.model.Block;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String data = "CipherLedger";
+        Block block = new Block(
+                "Hello CipherLedger",
+                "0"
+        );
 
-        String hash = HashUtil.generateHash(data);
-
-        System.out.println("Original Data : " + data);
-        System.out.println("SHA-256 Hash  : " + hash);
+        System.out.println("Data          : " + block.getData());
+        System.out.println("Previous Hash : " + block.getPreviousHash());
+        System.out.println("Current Hash  : " + block.getHash());
+        System.out.println("Timestamp     : " + block.getTimestamp());
 
     }
+
 }
