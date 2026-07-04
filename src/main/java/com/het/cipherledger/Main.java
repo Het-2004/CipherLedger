@@ -2,7 +2,7 @@ package com.het.cipherledger;
 
 
 import com.het.cipherledger.blockchain.Blockchain;
-import com.het.cipherledger.model.Block;
+import com.het.cipherledger.blockchain.BlockchainValidator;
 
 
 public class Main {
@@ -13,6 +13,7 @@ public class Main {
 
         Blockchain blockchain =
                 new Blockchain();
+
 
 
         blockchain.addBlock(
@@ -26,33 +27,22 @@ public class Main {
 
 
 
-        for(Block block :
-                blockchain.getChain()) {
+        BlockchainValidator validator =
+                new BlockchainValidator();
 
 
-            System.out.println(
-                    "Data : "
-                            + block.getData()
-            );
+
+        boolean result =
+                validator.isValid(
+                        blockchain.getChain()
+                );
 
 
-            System.out.println(
-                    "Previous Hash : "
-                            + block.getPreviousHash()
-            );
 
-
-            System.out.println(
-                    "Hash : "
-                            + block.getHash()
-            );
-
-
-            System.out.println(
-                    "------------------------"
-            );
-
-        }
+        System.out.println(
+                "Blockchain Valid : "
+                        + result
+        );
 
     }
 
