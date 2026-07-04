@@ -1,20 +1,58 @@
 package com.het.cipherledger;
 
+
+import com.het.cipherledger.blockchain.Blockchain;
 import com.het.cipherledger.model.Block;
+
 
 public class Main {
 
+
     public static void main(String[] args) {
 
-        Block block = new Block(
-                "Hello CipherLedger",
-                "0"
+
+        Blockchain blockchain =
+                new Blockchain();
+
+
+        blockchain.addBlock(
+                "Het sends 10 coins"
         );
 
-        System.out.println("Data          : " + block.getData());
-        System.out.println("Previous Hash : " + block.getPreviousHash());
-        System.out.println("Current Hash  : " + block.getHash());
-        System.out.println("Timestamp     : " + block.getTimestamp());
+
+        blockchain.addBlock(
+                "Rahul sends 5 coins"
+        );
+
+
+
+        for(Block block :
+                blockchain.getChain()) {
+
+
+            System.out.println(
+                    "Data : "
+                            + block.getData()
+            );
+
+
+            System.out.println(
+                    "Previous Hash : "
+                            + block.getPreviousHash()
+            );
+
+
+            System.out.println(
+                    "Hash : "
+                            + block.getHash()
+            );
+
+
+            System.out.println(
+                    "------------------------"
+            );
+
+        }
 
     }
 
