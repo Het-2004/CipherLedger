@@ -1,8 +1,9 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.wallet.Wallet;
-import com.het.cipherledger.wallet.WalletManager;
+import com.het.cipherledger.util.ConsoleUtil;
+import com.het.cipherledger.util.DateUtil;
+import com.het.cipherledger.util.RandomUtil;
 
 
 public class Main {
@@ -11,23 +12,22 @@ public class Main {
     public static void main(String[] args){
 
 
-        WalletManager manager =
-                new WalletManager();
+        ConsoleUtil.print(
+                "CipherLedger Started"
+        );
 
 
-
-        Wallet wallet =
-                manager.createWallet();
+        ConsoleUtil.line();
 
 
 
         System.out.println(
-                "Wallet Address:"
+                DateUtil.now()
         );
 
 
         System.out.println(
-                wallet.getAddress()
+                RandomUtil.generateId()
         );
 
 
