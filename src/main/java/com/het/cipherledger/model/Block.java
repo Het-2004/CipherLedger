@@ -1,6 +1,8 @@
 package com.het.cipherledger.model;
 
 import com.het.cipherledger.crypto.HashUtil;
+import com.het.cipherledger.crypto.MerkleTree;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class Block {
     private long timestamp;
     private int nonce;
     private List<Transaction> transactions;
+    private String merkleRoot;
 
     public Block(String previousHash){
 
@@ -20,14 +23,22 @@ public class Block {
         this.hash = calculateHash();
     }
 
+    public void updateMerkleRoot() {
+        List<String> hashes = transactions.stream().map(Transaction::getTransactionId).collect(Collectors.toList());
+        merkleRoot = MerkleTree.getMerkleRoot(hashes);
+    }
+
     public String calculateHash(){
-        return HashUtil.generateHash(previousHash + timestamp + nonce + transactions.toString());
+        return HashUtil.generateHash(previousHash + timestamp + nonce + merkleRoot);
     }
 
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);
+        updateMerkleRoot();
         this.hash = calculateHash();
     }
+
+    public String getMerkleRoot() {return merkleRoot;}
 
     public String getHash(){
         return hash;

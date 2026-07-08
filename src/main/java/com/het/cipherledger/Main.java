@@ -7,25 +7,33 @@ public class Main {
 
     public static void main(String[] args) {
 
-        WalletManager manager = new WalletManager();
+        WalletManager manager =
+                new WalletManager();
 
-        Wallet het = manager.createWallet();
+        Wallet het =
+                manager.createWallet();
 
-        UTXO utxo = new UTXO();
+        Wallet alex =
+                manager.createWallet();
 
 
-        TransactionOutput reward =
-                new TransactionOutput(
+        Transaction tx =
+                new Transaction(
                         het.getPublicKey(),
-                        100
+                        alex.getPublicKey(),
+                        50
                 );
 
-        utxo.add(reward);
+
+        Block block =
+                new Block("0");
+
+
+        block.addTransaction(tx);
 
 
         System.out.println(
-                "Balance : "
-                        + het.getBalance(utxo)
+                block.getMerkleRoot()
         );
     }
 }
