@@ -1,8 +1,9 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.network.NetworkManager;
-import com.het.cipherledger.network.Peer;
+import com.het.cipherledger.api.TransactionController;
+import com.het.cipherledger.api.WalletController;
+import com.het.cipherledger.wallet.Wallet;
 
 
 public class Main {
@@ -12,40 +13,58 @@ public class Main {
 
 
 
-        NetworkManager network =
-                new NetworkManager(
-                        "NODE-1"
-                );
+        WalletController walletController =
+                new WalletController();
+
+
+
+        Wallet wallet =
+                walletController.createWallet();
 
 
 
 
-        Peer peer =
-                new Peer(
+        System.out.println(
 
-                        "NODE-2",
+                "Wallet: "
+                        +
+                        wallet.getAddress()
 
-                        "localhost",
-
-                        8081
-
-                );
-
-
-
-
-        network.connectPeer(
-                peer
         );
 
 
 
-        network.broadcast(
-                "New block mined"
+
+        TransactionController transactionController =
+                new TransactionController();
+
+
+
+
+        boolean result =
+                transactionController
+                        .sendTransaction(
+
+                                "Het",
+
+                                "Alex",
+
+                                500
+
+                        );
+
+
+
+
+        System.out.println(
+
+                "Transaction status: "
+                        +
+                        result
+
         );
 
 
     }
-
 
 }
