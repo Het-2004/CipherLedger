@@ -1,5 +1,6 @@
 package com.het.cipherledger.wallet;
 
+import com.het.cipherledger.model.UTXO;
 import com.het.cipherledger.crypto.Base58;
 
 import java.security.PublicKey;
@@ -9,6 +10,12 @@ public class Wallet {
     private PublicKey publicKey;
     private PrivateKey privateKey;
     private String address;
+
+    public double getBalance(UTXO utxo) {
+        return utxo.getBalance(
+                publicKey
+        );
+    }
 
     public Wallet(PublicKey publicKey, PrivateKey privateKey){
         this.publicKey = publicKey;

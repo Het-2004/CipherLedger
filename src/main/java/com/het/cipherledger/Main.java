@@ -1,70 +1,31 @@
 package com.het.cipherledger;
 
-
-import com.het.cipherledger.model.Transaction;
-import com.het.cipherledger.wallet.Wallet;
-import com.het.cipherledger.wallet.WalletManager;
-
+import com.het.cipherledger.model.*;
+import com.het.cipherledger.wallet.*;
 
 public class Main {
 
+    public static void main(String[] args) {
 
-    public static void main(String[] args){
+        WalletManager manager = new WalletManager();
 
+        Wallet het = manager.createWallet();
 
-
-        WalletManager manager =
-                new WalletManager();
-
-
-
-        Wallet het =
-                manager.createWallet();
+        UTXO utxo = new UTXO();
 
 
-
-        Wallet alex =
-                manager.createWallet();
-
-
-
-
-        Transaction transaction =
-                new Transaction(
-
+        TransactionOutput reward =
+                new TransactionOutput(
                         het.getPublicKey(),
-
-                        alex.getPublicKey(),
-
-                        50
-
+                        100
                 );
 
-
-
-
-
-        transaction.generateSignature(
-
-                het.getPrivateKey()
-
-        );
-
-
-
+        utxo.add(reward);
 
 
         System.out.println(
-
-                "Signature Valid : "
-                        +
-                        transaction.verifySignature()
-
+                "Balance : "
+                        + het.getBalance(utxo)
         );
-
-
-
     }
-
-
 }
