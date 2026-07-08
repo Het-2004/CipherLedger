@@ -1,8 +1,8 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.blockchain.Blockchain;
 import com.het.cipherledger.model.Transaction;
+import com.het.cipherledger.transaction.TransactionProcessor;
 
 
 public class Main {
@@ -11,49 +11,25 @@ public class Main {
     public static void main(String[] args){
 
 
-        Blockchain blockchain =
-                new Blockchain();
-
-
-
-        blockchain.addTransaction(
-
+        Transaction transaction =
                 new Transaction(
                         "Het",
                         "Alex",
-                        "50"
-                )
-
-        );
-
-
-        blockchain.addTransaction(
-
-                new Transaction(
-                        "Alex",
-                        "John",
-                        "20"
-                )
-
-        );
-
-
-
-        blockchain
-                .getChain()
-                .forEach(
-                        block -> {
-
-
-                            System.out.println(
-                                    block.getHash()
-                            );
-
-                        }
+                        100.0
                 );
 
 
-    }
 
+        TransactionProcessor processor =
+                new TransactionProcessor();
+
+
+
+        processor.process(
+                transaction
+        );
+
+
+    }
 
 }
