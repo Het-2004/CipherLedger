@@ -1,17 +1,17 @@
 package com.het.cipherledger.api;
 
-import com.het.cipherledger.wallet.Wallet;
-import com.het.cipherledger.wallet.WalletManager;
+import com.het.cipherledger.wallet.*;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/api/wallet")
 public class WalletController {
 
-    private final WalletManager walletManager;
+    private WalletManager manager = new WalletManager();
 
-    public WalletController(){
-        walletManager = new WalletManager();
-    }
-
-    public Wallet createWallet(){
-        return walletManager.createWallet();
+    @PostMapping("/create")
+    public String create(){
+        Wallet wallet = manager.createWallet();
+        return wallet.getAddress();
     }
 }

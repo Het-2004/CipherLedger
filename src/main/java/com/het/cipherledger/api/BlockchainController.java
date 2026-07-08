@@ -1,23 +1,28 @@
 package com.het.cipherledger.api;
 
-import com.het.cipherledger.blockchain.Blockchain;
 import com.het.cipherledger.model.Block;
+import com.het.cipherledger.service.BlockchainService;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/blockchain")
 public class BlockchainController {
+    private final BlockchainService service;
 
-    private final Blockchain blockchain;
-
-    public BlockchainController(){
-        blockchain = new Blockchain();
+    public BlockchainController(BlockchainService service){
+        this.service = service;
     }
 
-    public List<Block> getBlockchain(){
-        return blockchain.getChain();
+    @GetMapping
+    public List<Block> blocks(){
+        return service.getBlocks();
     }
 
-    public int getBlockCount(){
-        return blockchain.size();
+    @PostMapping("/save")
+    public Block save(@RequestBody Block block){
+        return service.save(block);
     }
 }

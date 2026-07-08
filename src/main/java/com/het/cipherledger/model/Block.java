@@ -2,17 +2,22 @@ package com.het.cipherledger.model;
 
 import com.het.cipherledger.crypto.HashUtil;
 import com.het.cipherledger.crypto.MerkleTree;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 
+@Document(collection = "blocks")
 public class Block {
+    @Id
+    private String id;
     private String hash;
     private String previousHash;
     private long timestamp;
     private int nonce;
-    private List<Transaction> transactions;
     private String merkleRoot;
+    private List<Transaction> transactions;
 
     public Block(String previousHash){
 

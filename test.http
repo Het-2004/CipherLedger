@@ -1,0 +1,3 @@
+GET http://localhost:8080/api/blockchain
+
+POST http://localhost:8080/api/wallet/create
