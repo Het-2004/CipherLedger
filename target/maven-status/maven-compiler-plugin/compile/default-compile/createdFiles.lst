@@ -5,13 +5,14 @@ com\het\App.class
 com\het\cipherledger\exception\InvalidBlockException.class
 com\het\cipherledger\blockchain\GenesisBlock.class
 com\het\cipherledger\api\WalletController.class
+com\het\cipherledger\crypto\MerkleTree.class
+com\het\cipherledger\model\RewardTransaction.class
 com\het\cipherledger\network\Peer.class
 com\het\cipherledger\wallet\WalletService.class
 com\het\cipherledger\model\TransactionInput.class
 com\het\cipherledger\crypto\Base58.class
 com\het\cipherledger\storage\JsonStorage.class
 com\het\cipherledger\api\BlockchainController.class
-com\het\cipherledger\crypto\MarkleTree.class
 com\het\cipherledger\exception\InvalidTransactionException.class
 com\het\cipherledger\exception\WalletException.class
 com\het\cipherledger\storage\FileManager.class

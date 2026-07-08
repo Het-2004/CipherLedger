@@ -1,39 +1,40 @@
 package com.het.cipherledger;
 
-import com.het.cipherledger.model.*;
+import com.het.cipherledger.blockchain.Blockchain;
+import com.het.cipherledger.model.Block;
 import com.het.cipherledger.wallet.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
+
         WalletManager manager =
                 new WalletManager();
 
-        Wallet het =
+
+        Wallet miner =
                 manager.createWallet();
 
-        Wallet alex =
-                manager.createWallet();
 
-
-        Transaction tx =
-                new Transaction(
-                        het.getPublicKey(),
-                        alex.getPublicKey(),
-                        50
-                );
+        Blockchain blockchain =
+                new Blockchain();
 
 
         Block block =
-                new Block("0");
+                blockchain.createBlock();
 
 
-        block.addTransaction(tx);
+        blockchain.addBlock(
+                block,
+                miner
+        );
 
 
         System.out.println(
-                block.getMerkleRoot()
+                "Blocks: "
+                        +
+                        blockchain.size()
         );
     }
 }
