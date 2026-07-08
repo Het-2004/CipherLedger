@@ -2,6 +2,7 @@ package com.het.cipherledger.blockchain;
 
 import com.het.cipherledger.model.Block;
 import com.het.cipherledger.model.Transaction;
+import com.het.cipherledger.mining.Miner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class Blockchain {
     }
 
     public void addBlock(Block block){
+        Miner miner = new Miner();
+        miner.mineBlock(block);
         chain.add(block);
     }
 
