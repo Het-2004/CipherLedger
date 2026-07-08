@@ -3,35 +3,18 @@ package com.het.cipherledger.blockchain;
 import com.het.cipherledger.model.Block;
 import java.util.List;
 
-/**
- * ============================================
- * Project : CipherLedger
- * Class   : BlockchainValidator
- * Purpose : Validate blockchain integrity
- * ============================================
- */
+public final class BlockchainValidator {
 
-public class BlockchainValidator {
+    public boolean validate(List<Block> chain){
+        for(int i=1; i<chain.size(); i++){
+            Block current = chain.get(i);
+            Block previous = chain.get(i-1);
 
-    public boolean isValid(List<Block> chain) {
-
-        for(int i = 1; i < chain.size(); i++) {
-            Block currentBlock = chain.get(i);
-            Block previousBlock = chain.get(i - 1);
-
-            /*
-             Check current block hash
-             */
-            if(!currentBlock.getHash().equals(currentBlock.calculateHash())) {
-                System.out.println("Invalid Current Hash");
-                return false;
+            if(!current.getHash().equals(current.calculateHash())){
+               return false;
             }
 
-            /*
-             Check previous hash connection
-             */
-            if(!currentBlock.getPreviousHash().equals(previousBlock.getHash())) {
-                System.out.println("Invalid Previous Hash");
+            if(!current.getPreviousHash().equals(previous.getHash())){
                 return false;
             }
         }

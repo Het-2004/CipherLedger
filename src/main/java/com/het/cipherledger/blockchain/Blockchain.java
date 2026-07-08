@@ -1,60 +1,42 @@
 package com.het.cipherledger.blockchain;
 
 import com.het.cipherledger.model.Block;
-
+import com.het.cipherledger.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * ==================================================
- * Project : CipherLedger
- * Class   : Blockchain
- * Purpose : Manage blocks in the chain
- * ==================================================
- */
-
 public class Blockchain {
-    /*
-        Stores all blocks
-    */
-    private final List<Block> chain;
+    private List<Block> chain;
 
-    /*
-        Constructor
-    */
     public Blockchain(){
-        this.chain = new ArrayList<>();
-        createGenesisBlock();
+        chain = new ArrayList<>();
+        chain.add(GenesisBlock.create());
     }
 
-    /*
-        First block in blockchain
-    */
-    private void createGenesisBlock(){
-        Block genesisBlock = new Block("Genesis Block", "0");
-        chain.add(genesisBlock);
+    public void addBlock(Block block){
+        chain.add(block);
     }
 
-    /*
-        Add new block
-    */
-    public void addBlock(String data){
-        Block previousBlock = getLatestBlock();
-        Block newBlock = new Block(data, previousBlock.getHash());
-        chain.add(newBlock);
+    public Block createBlock(){
+        Block previous = getLatestBlock();
+        return new Block(previous.getHash());
     }
 
-    /*
-        Get latest block
-    */
-    public Block getLatestBlock() {
-        return chain.get(chain.size() - 1);
+    public void addTransaction(Transaction transaction){
+        Block block = createBlock();
+        block.addTransaction(transaction);
+        addBlock(block);
     }
 
-    /*
-        return complete blockchain
-    */
+    public Block getLatestBlock(){
+        return chain.get(chain.size()-1);
+    }
+
     public List<Block> getChain(){
         return chain;
+    }
+
+    public int size(){
+        return chain.size();
     }
 }
