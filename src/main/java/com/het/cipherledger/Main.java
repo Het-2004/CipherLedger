@@ -1,9 +1,9 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.api.TransactionController;
-import com.het.cipherledger.api.WalletController;
+import com.het.cipherledger.model.Transaction;
 import com.het.cipherledger.wallet.Wallet;
+import com.het.cipherledger.wallet.WalletManager;
 
 
 public class Main {
@@ -13,58 +13,58 @@ public class Main {
 
 
 
-        WalletController walletController =
-                new WalletController();
+        WalletManager manager =
+                new WalletManager();
 
 
 
-        Wallet wallet =
-                walletController.createWallet();
+        Wallet het =
+                manager.createWallet();
+
+
+
+        Wallet alex =
+                manager.createWallet();
+
+
+
+
+        Transaction transaction =
+                new Transaction(
+
+                        het.getPublicKey(),
+
+                        alex.getPublicKey(),
+
+                        50
+
+                );
+
+
+
+
+
+        transaction.generateSignature(
+
+                het.getPrivateKey()
+
+        );
+
 
 
 
 
         System.out.println(
 
-                "Wallet: "
+                "Signature Valid : "
                         +
-                        wallet.getAddress()
+                        transaction.verifySignature()
 
         );
 
-
-
-
-        TransactionController transactionController =
-                new TransactionController();
-
-
-
-
-        boolean result =
-                transactionController
-                        .sendTransaction(
-
-                                "Het",
-
-                                "Alex",
-
-                                500
-
-                        );
-
-
-
-
-        System.out.println(
-
-                "Transaction status: "
-                        +
-                        result
-
-        );
 
 
     }
+
 
 }
