@@ -1,9 +1,7 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.util.ConsoleUtil;
-import com.het.cipherledger.util.DateUtil;
-import com.het.cipherledger.util.RandomUtil;
+import com.het.cipherledger.exception.InvalidTransactionException;
 
 
 public class Main {
@@ -12,22 +10,8 @@ public class Main {
     public static void main(String[] args){
 
 
-        ConsoleUtil.print(
-                "CipherLedger Started"
-        );
-
-
-        ConsoleUtil.line();
-
-
-
-        System.out.println(
-                DateUtil.now()
-        );
-
-
-        System.out.println(
-                RandomUtil.generateId()
+        throw new InvalidTransactionException(
+                "Testing CipherLedger Exception"
         );
 
 
