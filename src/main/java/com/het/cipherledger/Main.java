@@ -1,8 +1,8 @@
 package com.het.cipherledger;
 
 
-import com.het.cipherledger.model.Transaction;
-import com.het.cipherledger.transaction.TransactionProcessor;
+import com.het.cipherledger.wallet.Wallet;
+import com.het.cipherledger.wallet.WalletManager;
 
 
 public class Main {
@@ -11,22 +11,23 @@ public class Main {
     public static void main(String[] args){
 
 
-        Transaction transaction =
-                new Transaction(
-                        "Het",
-                        "Alex",
-                        100.0
-                );
+        WalletManager manager =
+                new WalletManager();
 
 
 
-        TransactionProcessor processor =
-                new TransactionProcessor();
+        Wallet wallet =
+                manager.createWallet();
 
 
 
-        processor.process(
-                transaction
+        System.out.println(
+                "Wallet Address:"
+        );
+
+
+        System.out.println(
+                wallet.getAddress()
         );
 
 
