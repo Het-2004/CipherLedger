@@ -26,6 +26,7 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <dependencies>
 
 
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -53,5 +54,15 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   </dependencies>
 
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+  </build>
 
 </project>
