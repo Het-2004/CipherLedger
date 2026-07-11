@@ -1,9 +1,7 @@
 package com.het.cipherledger.blockchain;
 
-import com.het.cipherledger.mining.Miner;
 import com.het.cipherledger.model.Block;
 import com.het.cipherledger.model.Transaction;
-import com.het.cipherledger.wallet.Wallet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +9,7 @@ import java.util.List;
 public class Blockchain {
 
     private List<Block> chain;
+    private List<Transaction> pendingTransactions = new ArrayList<>();
 
     public Blockchain() {
         chain = new ArrayList<>();
@@ -19,19 +18,17 @@ public class Blockchain {
 
     public Block createBlock() {
         Block previous = getLatestBlock();
-        return new Block(previous.getHash());
+        Block newBlock = new Block(previous.getHash());
+        newBlock.setIndex(previous.getIndex() + 1);
+        return newBlock;
     }
 
-    public void addBlock(Block block, Wallet minerWallet) {
-        Miner miner = new Miner();
-        miner.mineBlock(block, minerWallet);
+    public void addBlock(Block block) {
         chain.add(block);
     }
 
-    public void addTransaction(Transaction transaction, Wallet minerWallet) {
-        Block block = createBlock();
-        block.addTransaction(transaction);
-        addBlock(block, minerWallet);
+    public void addTransaction(Transaction transaction) {
+        pendingTransactions.add(transaction);
     }
 
     public Block getLatestBlock() {
@@ -44,5 +41,13 @@ public class Blockchain {
 
     public int size() {
         return chain.size();
+    }
+
+    public List<Transaction> getPendingTransactions() {
+        return pendingTransactions;
+    }
+
+    public void clearPendingTransactions() {
+        pendingTransactions.clear();
     }
 }

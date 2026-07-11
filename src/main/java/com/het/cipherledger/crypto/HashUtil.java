@@ -1,79 +1,22 @@
 package com.het.cipherledger.crypto;
 
-import com.het.cipherledger.config.Constants;
-
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
+public class HashUtil {
 
-public final class HashUtil {
-
-
-    private HashUtil() {
-
-    }
-
-
-
-    public static String generateHash(String input) {
-
+    public static String generateHash(String data) {
         try {
-
-
-            MessageDigest digest =
-                    MessageDigest.getInstance(
-                            Constants.HASH_ALGORITHM
-                    );
-
-
-            byte[] bytes =
-                    digest.digest(
-                            input.getBytes(
-                                    StandardCharsets.UTF_8
-                            )
-                    );
-
-
-            StringBuilder builder =
-                    new StringBuilder();
-
-
-
-            for(byte b : bytes) {
-
-
-                String hex =
-                        Integer.toHexString(
-                                0xff & b
-                        );
-
-
-                if(hex.length()==1) {
-
-                    builder.append('0');
-
-                }
-
-
-                builder.append(hex);
-
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(data.getBytes("UTF-8"));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
             }
-
-
-            return builder.toString();
-
-
-
-        }catch(Exception e){
-
-
-            throw new RuntimeException(
-                    "Hash generation failed",
-                    e
-            );
-
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
     }
-
 }

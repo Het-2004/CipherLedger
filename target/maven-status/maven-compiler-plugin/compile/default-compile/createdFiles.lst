@@ -16,6 +16,7 @@ com\het\cipherledger\exception\InvalidTransactionException.class
 com\het\cipherledger\util\StringUtil.class
 com\het\cipherledger\api\TransactionController.class
 com\het\cipherledger\model\Block.class
+com\het\cipherledger\websocket\WebSocketConfig.class
 com\het\cipherledger\crypto\SignatureUtil.class
 com\het\cipherledger\config\BlockchainConfig.class
 com\het\cipherledger\transaction\TransactionProcessor.class
@@ -23,6 +24,7 @@ com\het\cipherledger\transaction\TransactionValidator.class
 com\het\cipherledger\network\Node.class
 com\het\cipherledger\model\UTXO.class
 com\het\cipherledger\Main.class
+com\het\cipherledger\dto\MiningResponse.class
 com\het\cipherledger\exception\BlockchainException.class
 com\het\cipherledger\network\NetworkManager.class
 com\het\cipherledger\storage\BlockchainStorage.class
@@ -31,7 +33,9 @@ com\het\cipherledger\util\JsonUtil.class
 com\het\cipherledger\exception\InvalidBlockException.class
 com\het\cipherledger\blockchain\GenesisBlock.class
 com\het\cipherledger\api\WalletController.class
+com\het\cipherledger\websocket\BlockSocketService.class
 com\het\cipherledger\crypto\Base58.class
+com\het\cipherledger\service\MiningOrchestrator.class
 com\het\cipherledger\exception\WalletException.class
 com\het\cipherledger\storage\FileManager.class
 com\het\cipherledger\config\CorsConfig.class
@@ -39,6 +43,8 @@ com\het\cipherledger\util\ConsoleUtil.class
 com\het\cipherledger\mining\Miner.class
 com\het\cipherledger\model\TransactionOutput.class
 com\het\cipherledger\model\Transaction.class
+com\het\cipherledger\service\MiningService.class
+com\het\cipherledger\utils\StringUtils.class
 com\het\cipherledger\config\Constants.class
 com\het\cipherledger\blockchain\Blockchain.class
 com\het\cipherledger\util\DateUtil.class

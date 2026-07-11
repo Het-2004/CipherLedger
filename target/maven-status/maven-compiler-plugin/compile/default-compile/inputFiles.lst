@@ -13,6 +13,7 @@ D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\HashUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\KeyGeneratorUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\MerkleTree.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\SignatureUtil.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\dto\MiningResponse.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\exception\BlockchainException.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\exception\InvalidBlockException.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\exception\InvalidTransactionException.java
@@ -32,6 +33,9 @@ D:\Project\CipherLedger\src\main\java\com\het\cipherledger\network\Node.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\network\Peer.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\repository\BlockRepository.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\BlockchainService.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\MiningOrchestrator.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\MiningService.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\WalletService.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\storage\BlockchainStorage.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\storage\FileManager.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\storage\JsonStorage.java
@@ -43,6 +47,9 @@ D:\Project\CipherLedger\src\main\java\com\het\cipherledger\util\DateUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\util\JsonUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\util\RandomUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\util\StringUtil.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\utils\StringUtils.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\wallet\Wallet.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\wallet\WalletManager.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\wallet\WalletService.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\websocket\BlockSocketService.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\websocket\WebSocketConfig.java

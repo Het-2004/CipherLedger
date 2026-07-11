@@ -1,6 +1,7 @@
 package com.het.cipherledger;
 
 import com.het.cipherledger.blockchain.Blockchain;
+import com.het.cipherledger.model.Block;
 import com.het.cipherledger.model.Transaction;
 import com.het.cipherledger.wallet.Wallet;
 import com.het.cipherledger.wallet.WalletManager;
@@ -21,7 +22,9 @@ public class BlockchainTest {
         Transaction transaction = new Transaction(sender.getPublicKey(), receiver.getPublicKey(), 100);
         transaction.generateSignature(sender.getPrivateKey());
         Blockchain blockchain = new Blockchain();
-        blockchain.addTransaction(transaction, miner);
+        Block newBlock = blockchain.createBlock();
+        newBlock.addTransaction(transaction);
+        blockchain.addBlock(newBlock);
         assertEquals(2, blockchain.size());
     }
 }

@@ -1,29 +1,29 @@
 package com.het.cipherledger.storage;
 
-
-import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileManager {
 
-    public void write(String path, String data){
-        try {
-            Files.writeString(Paths.get(path), data);
-        }catch(IOException e){
-            throw new RuntimeException("File write failed", e);
+    public void write(String path, String content) {
+        try (FileWriter writer = new FileWriter(path)) {
+            writer.write(content);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
     }
 
-    public String read(String path){
+    public String read(String path) {
         try {
-            if(!Files.exists(Paths.get(path))){
+            File file = new File(path);
+            if (!file.exists()) {
                 return "";
             }
-            return Files.readString(Paths.get(path));
-        }catch(IOException e){
-            throw new RuntimeException("File read failed", e);
+            return new String(Files.readAllBytes(Paths.get(path)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

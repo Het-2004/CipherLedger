@@ -1,71 +1,118 @@
 package com.het.cipherledger.model;
 
-import com.het.cipherledger.crypto.HashUtil;
-import com.het.cipherledger.crypto.MerkleTree;
+import com.het.cipherledger.utils.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.stream.Collectors;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "blocks")
 public class Block {
+
     @Id
     private String id;
-    private String hash;
+
+    private int index;
     private String previousHash;
-    private long timestamp;
+    private String hash;
     private int nonce;
-    private String merkleRoot;
-    private List<Transaction> transactions;
+    private long timestamp;
+    private List<Transaction> transactions = new ArrayList<>();
 
-    public Block(String previousHash){
+    public Block() {
+        this.timestamp = new Date().getTime();
+    }
 
+    public Block(String previousHash) {
         this.previousHash = previousHash;
-        this.timestamp = System.currentTimeMillis();
-        this.nonce = 0;
-        this.transactions = new ArrayList<>();
+        this.timestamp = new Date().getTime();
         this.hash = calculateHash();
     }
 
-    public void updateMerkleRoot() {
-        List<String> hashes = transactions.stream().map(Transaction::getTransactionId).collect(Collectors.toList());
-        merkleRoot = MerkleTree.getMerkleRoot(hashes);
+    public Block(int index, String previousHash, String hash, int nonce, long timestamp) {
+        this.index = index;
+        this.previousHash = previousHash;
+        this.hash = hash;
+        this.nonce = nonce;
+        this.timestamp = timestamp;
     }
 
-    public String calculateHash(){
-        return HashUtil.generateHash(previousHash + timestamp + nonce + merkleRoot);
+    public String calculateHash() {
+        return StringUtils.applySha256(
+                previousHash +
+                        Long.toString(timestamp) +
+                        Integer.toString(nonce) +
+                        transactions.toString()
+        );
     }
 
-    public void addTransaction(Transaction transaction){
-        transactions.add(transaction);
-        updateMerkleRoot();
+    public void addTransaction(Transaction transaction) {
+        if (transaction != null) {
+            transactions.add(transaction);
+        }
+    }
+
+    public void incrementNonce() {
+        this.nonce++;
+    }
+
+    public void updateHash() {
         this.hash = calculateHash();
     }
 
-    public String getMerkleRoot() {return merkleRoot;}
+    // Getters and Setters
 
-    public String getHash(){
-        return hash;
+    public String getId() {
+        return id;
     }
 
-    public String getPreviousHash(){
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getPreviousHash() {
         return previousHash;
     }
 
-    public List<Transaction> getTransactions(){
-        return transactions;
+    public void setPreviousHash(String previousHash) {
+        this.previousHash = previousHash;
     }
 
-    public int getNonce(){
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public int getNonce() {
         return nonce;
     }
 
-    public void incrementNonce(){
-        nonce++;
+    public void setNonce(int nonce) {
+        this.nonce = nonce;
     }
 
-    public void updateHash(){
-        hash = calculateHash();
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

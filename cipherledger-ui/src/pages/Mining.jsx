@@ -1,10 +1,5 @@
-function Mining(){
+import MiningPanel from "../components/mining/MiningPanel";
 
-    return(
-        <div>
-            <h1>Mining</h1>
-        </div>
-    )
+export default function Mining() {
+  return <MiningPanel />;
 }
-
-export default Mining;
