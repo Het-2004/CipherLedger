@@ -13,20 +13,48 @@ export default function Blockchain() {
   const [validatingIndex, setValidatingIndex] = useState(-1);
   const [tamperedIndex, setTamperedIndex] = useState(-1);
   const [chainBlocks, setChainBlocks] = useState([]);
+  
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     setChainBlocks(blocks);
   }, [blocks]);
 
-  // Search filtering
+  // Reset page on search change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  // Enhanced search filtering (block index/hash, tx ID, wallet addresses)
   const filteredBlocks = chainBlocks.filter(b => {
-    const query = searchQuery.toLowerCase();
-    return (
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return true;
+    
+    // Check block fields
+    if (
       b.index.toString().includes(query) ||
       b.hash.toLowerCase().includes(query) ||
       (b.previousHash && b.previousHash.toLowerCase().includes(query))
-    );
+    ) {
+      return true;
+    }
+
+    // Check transactions (ID, sender, receiver)
+    if (b.transactions && Array.isArray(b.transactions)) {
+      return b.transactions.some(tx => 
+        (tx.id && tx.id.toLowerCase().includes(query)) ||
+        (tx.sender && tx.sender.toLowerCase().includes(query)) ||
+        (tx.receiver && tx.receiver.toLowerCase().includes(query))
+      );
+    }
+
+    return false;
   });
+
+  const totalPages = Math.ceil(filteredBlocks.length / itemsPerPage);
+  const displayedBlocks = filteredBlocks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   // Run audit scan animation
   const handleValidateChain = async () => {
@@ -148,16 +176,41 @@ export default function Blockchain() {
       </div>
 
       {/* Block List */}
-      {filteredBlocks.length === 0 ? (
+      {displayedBlocks.length === 0 ? (
         <div className="cyber-glass rounded-2xl border border-white/5 p-12 text-center text-slate-500 font-mono text-xs">
           No block nodes matched query "{searchQuery}"
         </div>
       ) : (
-        <BlockList
-          blocks={filteredBlocks}
-          validatingIndex={validatingIndex}
-          tamperedIndex={tamperedIndex}
-        />
+        <>
+          <BlockList
+            blocks={displayedBlocks}
+            validatingIndex={validatingIndex}
+            tamperedIndex={tamperedIndex}
+          />
+          
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-between items-center cyber-glass rounded-xl p-3 border border-white/5 font-mono text-[10px] text-slate-400 mt-6 select-none">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1.5 rounded-lg border border-white/5 bg-slate-900/60 hover:border-white/10 hover:text-slate-200 disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-all uppercase tracking-wider"
+              >
+                &lt; PREVIOUS RELAY
+              </button>
+              <span>
+                PAGE <span className="text-cyber-cyan font-bold">{currentPage}</span> OF <span className="text-slate-300 font-bold">{totalPages}</span>
+              </span>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1.5 rounded-lg border border-white/5 bg-slate-900/60 hover:border-white/10 hover:text-slate-200 disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-all uppercase tracking-wider"
+              >
+                NEXT RELAY &gt;
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

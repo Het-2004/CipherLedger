@@ -4,7 +4,7 @@ import { mockBlockchain } from "../../utils/mockBlockchain";
 
 export default function ActivityFeed() {
   const [logs, setLogs] = useState([]);
-  const bottomRef = useRef(null);
+  const containerRef = useRef(null);
 
   const fetchLogs = () => {
     setLogs(mockBlockchain.getLogs());
@@ -17,8 +17,8 @@ export default function ActivityFeed() {
   }, []);
 
   useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -36,7 +36,7 @@ export default function ActivityFeed() {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto font-mono text-[11px] space-y-2 pr-2 scrollbar-thin">
+      <div ref={containerRef} className="flex-1 overflow-y-auto font-mono text-[11px] space-y-2 pr-2 scrollbar-thin">
         {logs.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-500 gap-2">
             <Database className="w-6 h-6 text-slate-600 animate-pulse" />
@@ -59,7 +59,6 @@ export default function ActivityFeed() {
             </div>
           ))
         )}
-        <div ref={bottomRef} />
       </div>
     </div>
   );

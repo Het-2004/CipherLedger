@@ -12,15 +12,18 @@ public class MiningService {
     private final BlockRepository repository;
     private final BlockSocketService socket;
     private final MiningOrchestrator miningOrchestrator;
+    private final NodeService nodeService;
 
     public MiningService(
             BlockRepository repository,
             BlockSocketService socket,
-            MiningOrchestrator miningOrchestrator
+            MiningOrchestrator miningOrchestrator,
+            NodeService nodeService
     ) {
         this.repository = repository;
         this.socket = socket;
         this.miningOrchestrator = miningOrchestrator;
+        this.nodeService = nodeService;
     }
 
     public MiningResponse mine() {
@@ -32,6 +35,9 @@ public class MiningService {
 
         // WebSocket live update
         socket.sendBlock(block);
+        
+        // Broadcast to P2P network
+        nodeService.broadcastBlock(block);
 
         long end = System.currentTimeMillis();
 

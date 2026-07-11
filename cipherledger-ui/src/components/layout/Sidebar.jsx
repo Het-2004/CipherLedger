@@ -8,7 +8,8 @@ import {
   Cpu,
   Terminal,
   Activity,
-  FileText
+  FileText,
+  Key
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -44,6 +45,11 @@ export default function Sidebar() {
       name: "Network Nodes",
       url: "/nodes",
       icon: <Network className="w-5 h-5" />,
+    },
+    {
+      name: "Crypto Playground",
+      url: "/crypto-playground",
+      icon: <Key className="w-5 h-5" />,
     },
   ];
 

@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Bell, Volume2, VolumeX, LogOut, ShieldAlert, Cpu, CheckCircle } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { mockBlockchain } from "../../utils/mockBlockchain";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
@@ -35,6 +36,46 @@ export default function Navbar() {
     updateLogs();
     const logInterval = setInterval(updateLogs, 3000);
     return () => clearInterval(logInterval);
+  }, []);
+
+  // Listen for real-time block discovery events globally
+  useEffect(() => {
+    const handleBlockMined = (e) => {
+      const block = e.detail;
+      if (!block) return;
+      
+      // Trigger a beautiful notification
+      toast.success(`Holographic Block #${block.index} Mined & Verified!`, {
+        icon: "📦",
+        style: {
+          background: "#090d16",
+          color: "#f1f5f9",
+          border: "1px solid rgba(6,182,212,0.2)",
+          fontFamily: "monospace",
+          fontSize: "11px"
+        }
+      });
+      
+      // Play alert sound if enabled
+      const enabled = localStorage.getItem("cl_sound_enabled") !== "false";
+      if (enabled) {
+        try {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(520, audioCtx.currentTime); // synth beep
+          gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.2);
+        } catch(err) {}
+      }
+    };
+    
+    window.addEventListener("cl_block_mined", handleBlockMined);
+    return () => window.removeEventListener("cl_block_mined", handleBlockMined);
   }, []);
 
   const toggleSound = () => {
@@ -71,6 +112,20 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-6">
+        {/* Global Search Bar */}
+        <div className="relative group hidden md:block">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg className="w-4 h-4 text-slate-500 group-focus-within:text-cyber-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            placeholder="Search blocks, tx, nodes..." 
+            className="w-64 bg-slate-900/50 border border-white/10 rounded-full py-1.5 pl-9 pr-4 text-xs text-slate-200 font-mono focus:outline-none focus:border-cyber-cyan/50 focus:bg-slate-900 transition-all placeholder:text-slate-600"
+          />
+        </div>
+
         {/* Sound Toggle */}
         <button
           onClick={toggleSound}

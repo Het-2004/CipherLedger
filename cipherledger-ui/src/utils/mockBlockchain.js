@@ -15,6 +15,26 @@ export function simpleHash(data) {
   return (hex + hex + hex + hex + hex + hex + hex + hex).substring(0, 64);
 }
 
+export function calculateMerkleRoot(transactions) {
+  if (!transactions || transactions.length === 0) {
+    return simpleHash("empty");
+  }
+  let txHashes = transactions.map(tx => tx.id || simpleHash(JSON.stringify(tx)));
+  while (txHashes.length > 1) {
+    const nextLevel = [];
+    for (let i = 0; i < txHashes.length; i += 2) {
+      if (i + 1 < txHashes.length) {
+        nextLevel.push(simpleHash(txHashes[i] + txHashes[i + 1]));
+      } else {
+        // odd number of nodes: duplicate the node
+        nextLevel.push(simpleHash(txHashes[i] + txHashes[i]));
+      }
+    }
+    txHashes = nextLevel;
+  }
+  return txHashes[0];
+}
+
 // Initial Mock Blocks
 const defaultBlocks = [
   {
@@ -45,9 +65,9 @@ const defaultBlocks = [
 ];
 
 const defaultNodes = [
-  { id: "node-1", address: "192.168.1.101:8080", status: "ONLINE", latency: 12, name: "US-East Validator" },
-  { id: "node-2", address: "198.51.100.42:8080", status: "ONLINE", latency: 78, name: "EU-West Anchor" },
-  { id: "node-3", address: "203.0.113.88:8080", status: "ONLINE", latency: 142, name: "AP-South Peer" },
+  { id: "node-1", address: "34.207.112.51:8080", status: "ONLINE", latency: 12, name: "US-East Validator" },
+  { id: "node-2", address: "54.37.129.213:8080", status: "ONLINE", latency: 78, name: "EU-West Anchor" },
+  { id: "node-3", address: "13.127.183.170:8080", status: "ONLINE", latency: 142, name: "AP-South Peer" },
   { id: "node-4", address: "45.223.12.19:8080", status: "SYNCING", latency: 95, name: "SA-East Sync" }
 ];
 
@@ -63,9 +83,25 @@ export const mockBlockchain = {
 
   saveBlock(block) {
     const blocks = this.getBlocks();
+    
+    // Bundle pending transactions if not provided
+    if (!block.transactions || block.transactions.length === 0) {
+      const pending = this.getPendingTransactions();
+      block.transactions = pending.map(t => ({ ...t, status: "CONFIRMED" }));
+      localStorage.setItem("cl_pending_txs", JSON.stringify([]));
+    }
+    
+    // Calculate merkle root
+    block.merkleRoot = calculateMerkleRoot(block.transactions);
+    
     blocks.push(block);
     localStorage.setItem("cl_blocks", JSON.stringify(blocks));
     this.addLog(`Block #${block.index} saved to local ledger. Hash: ${block.hash.substring(0, 16)}...`);
+    
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("cl_block_mined", { detail: block }));
+    }
+    
     return block;
   },
 
@@ -223,3 +259,37 @@ export const mockBlockchain = {
     return true;
   }
 };
+
+// Start background simulation of real-world transaction broadcasts
+if (typeof window !== "undefined") {
+  const simulateTransactions = () => {
+    const wallets = ["CLD_ALICE_NODE", "CLD_BOB_MARKET", "CLD_CHARLIE_ESCROW", "CLD_DAVID_ANCHOR"];
+    const senders = ["CLD-SYSTEM-REWARD", "CLD-LIQUIDITY-POOL", ...wallets];
+    const receivers = ["CLD-STAKING-VAULT", ...wallets];
+    
+    setInterval(() => {
+      const sender = senders[Math.floor(Math.random() * senders.length)];
+      let receiver = receivers[Math.floor(Math.random() * receivers.length)];
+      while (sender === receiver) {
+        receiver = receivers[Math.floor(Math.random() * receivers.length)];
+      }
+      const amount = Math.floor(Math.random() * 95) + 5;
+      
+      const pending = mockBlockchain.getPendingTransactions();
+      if (pending.length < 6) {
+        const tx = {
+          sender,
+          receiver,
+          amount
+        };
+        const added = mockBlockchain.addTransaction(tx);
+        
+        // Dispatch Custom Event to notify active pages instantly
+        const event = new CustomEvent("cl_mempool_update", { detail: added });
+        window.dispatchEvent(event);
+      }
+    }, 18000); // simulated transaction broadcasts every 18 seconds
+  };
+  
+  setTimeout(simulateTransactions, 5000);
+}

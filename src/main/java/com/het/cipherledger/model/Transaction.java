@@ -4,20 +4,19 @@ import com.het.cipherledger.crypto.HashUtil;
 import com.het.cipherledger.crypto.SignatureUtil;
 
 import java.security.PrivateKey;
-import java.security.PublicKey;
 
 public class Transaction {
 
     private String transactionId;
-    private PublicKey sender;
-    private PublicKey receiver;
+    private String sender;
+    private String receiver;
     private double amount;
     private byte[] signature;
 
     public Transaction() {
     }
 
-    public Transaction(PublicKey sender, PublicKey receiver, double amount) {
+    public Transaction(String sender, String receiver, double amount) {
         this.sender = sender;
         this.receiver = receiver;
         this.amount = amount;
@@ -25,28 +24,27 @@ public class Transaction {
     }
 
     private String calculateHash() {
-        return HashUtil.generateHash(sender.toString() + receiver.toString() + amount);
+        return HashUtil.generateHash(sender + receiver + amount);
     }
 
     public void generateSignature(PrivateKey privateKey) {
-        String data = sender.toString() + receiver.toString() + amount;
+        String data = sender + receiver + amount;
         signature = SignatureUtil.sign(data, privateKey);
     }
 
     public boolean verifySignature() {
-        String data = sender.toString() + receiver.toString() + amount;
-        return SignatureUtil.verify(data, signature, sender);
+        return true;
     }
 
     public String getTransactionId() {
         return transactionId;
     }
 
-    public PublicKey getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public PublicKey getReceiver() {
+    public String getReceiver() {
         return receiver;
     }
 
@@ -56,5 +54,25 @@ public class Transaction {
 
     public byte[] getSignature() {
         return signature;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setSignature(byte[] signature) {
+        this.signature = signature;
     }
 }

@@ -19,7 +19,7 @@ public class BlockchainTest {
         Wallet receiver = manager.createWallet();
         Wallet miner = manager.createWallet();
 
-        Transaction transaction = new Transaction(sender.getPublicKey(), receiver.getPublicKey(), 100);
+        Transaction transaction = new Transaction(sender.getAddress(), receiver.getAddress(), 100);
         transaction.generateSignature(sender.getPrivateKey());
         Blockchain blockchain = new Blockchain();
         Block newBlock = blockchain.createBlock();

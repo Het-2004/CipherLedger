@@ -1,21 +1,46 @@
 package com.het.cipherledger.api;
 
 import com.het.cipherledger.model.Transaction;
-import com.het.cipherledger.transaction.TransactionProcessor;
-import com.het.cipherledger.wallet.Wallet;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@RestController
+@RequestMapping("/api/transactions")
 public class TransactionController {
 
-    private final TransactionProcessor processor;
+    private static final List<Transaction> transactionPool = new ArrayList<>();
+    private final com.het.cipherledger.websocket.BlockSocketService socketService;
 
-    public TransactionController(){
-        processor = new TransactionProcessor();
+    public TransactionController(com.het.cipherledger.websocket.BlockSocketService socketService) {
+        this.socketService = socketService;
     }
 
-    public boolean sendTransaction(Wallet sender, Wallet receiver, double amount){
-        Transaction transaction = new Transaction(sender.getPublicKey(), receiver.getPublicKey(), amount);
-        transaction.generateSignature(sender.getPrivateKey());
-        return processor.process(transaction);
+    @GetMapping
+    public List<Transaction> getTransactions() {
+        return transactionPool;
+    }
+
+    @PostMapping
+    public boolean sendTransaction(@RequestBody Transaction transaction) {
+        if (transaction.getTransactionId() == null) {
+            transaction.setTransactionId("tx-" + Math.floor(Math.random() * 1000000));
+        }
+        transactionPool.add(transaction);
+        
+        // Broadcast via WebSocket
+        socketService.sendTransaction(transaction);
+        
+        System.out.println("Transaction added to backend pool and broadcasted: " + transaction.getTransactionId());
+        return true;
+    }
+
+    public static List<Transaction> getPool() {
+        return transactionPool;
+    }
+
+    public static void clearPool() {
+        transactionPool.clear();
     }
 }
 

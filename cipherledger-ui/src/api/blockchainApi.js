@@ -1,14 +1,14 @@
 import axiosClient from "./axiosClient";
 import { mockBlockchain } from "../utils/mockBlockchain";
+import { normalizeBlocks } from "../utils/normalizeBlock";
 
 export const getBlocks = async () => {
   try {
-    // Backend path maps to GET /api/blockchain
     const res = await axiosClient.get("/blockchain");
-    return res;
+    return { data: normalizeBlocks(res.data) };
   } catch (err) {
     console.warn("Blockchain API unavailable. Falling back to local storage.", err);
-    return { data: mockBlockchain.getBlocks() };
+    return { data: normalizeBlocks(mockBlockchain.getBlocks()) };
   }
 };
 
@@ -30,4 +30,4 @@ export const saveBlock = async (block) => {
     console.warn("Save block API unavailable. Appending block to local storage.", err);
     return { data: mockBlockchain.saveBlock(block) };
   }
-};
+};

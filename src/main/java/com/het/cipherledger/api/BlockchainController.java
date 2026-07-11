@@ -11,9 +11,14 @@ import java.util.List;
 @RequestMapping("/api/blockchain")
 public class BlockchainController {
     private final BlockchainService service;
+    private final com.het.cipherledger.websocket.BlockSocketService socketService;
 
-    public BlockchainController(BlockchainService service){
+    public BlockchainController(
+        BlockchainService service,
+        com.het.cipherledger.websocket.BlockSocketService socketService
+    ){
         this.service = service;
+        this.socketService = socketService;
     }
 
     @GetMapping
@@ -23,6 +28,15 @@ public class BlockchainController {
 
     @PostMapping("/save")
     public Block save(@RequestBody Block block){
-        return service.save(block);
+        if (block.getTransactions() == null || block.getTransactions().isEmpty()) {
+            block.setTransactions(new java.util.ArrayList<>(TransactionController.getPool()));
+        }
+        Block saved = service.save(block);
+        
+        // Broadcast block via WebSocket
+        socketService.sendBlock(saved);
+        
+        TransactionController.clearPool();
+        return saved;
     }
 }

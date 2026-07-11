@@ -1,5 +1,8 @@
 D:\Project\CipherLedger\src\main\java\com\het\App.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\AuthController.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\BlockchainController.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\MiningController.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\NodeController.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\TransactionController.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\api\WalletController.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\blockchain\Blockchain.java
@@ -10,6 +13,7 @@ D:\Project\CipherLedger\src\main\java\com\het\cipherledger\config\Constants.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\config\CorsConfig.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\Base58.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\HashUtil.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\JwtUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\KeyGeneratorUtil.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\MerkleTree.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\crypto\SignatureUtil.java
@@ -27,14 +31,15 @@ D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\RewardTransacti
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\Transaction.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\TransactionInput.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\TransactionOutput.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\User.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\model\UTXO.java
-D:\Project\CipherLedger\src\main\java\com\het\cipherledger\network\NetworkManager.java
-D:\Project\CipherLedger\src\main\java\com\het\cipherledger\network\Node.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\network\Peer.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\repository\BlockRepository.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\repository\UserRepository.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\BlockchainService.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\MiningOrchestrator.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\MiningService.java
+D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\NodeService.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\service\WalletService.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\storage\BlockchainStorage.java
 D:\Project\CipherLedger\src\main\java\com\het\cipherledger\storage\FileManager.java

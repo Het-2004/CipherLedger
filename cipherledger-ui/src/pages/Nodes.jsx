@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Network, Activity, Globe, Plus, Cpu, RefreshCw, CheckCircle, ShieldAlert } from "lucide-react";
+import { Activity, Plus, Cpu, RefreshCw, CheckCircle } from "lucide-react";
 import { mockBlockchain } from "../utils/mockBlockchain";
 import toast from "react-hot-toast";
+import LiveWorldMap from "../components/nodes/LiveWorldMap";
 
 export default function Nodes() {
   const [nodes, setNodes] = useState([]);
@@ -16,9 +17,9 @@ export default function Nodes() {
 
   useEffect(() => {
     fetchNodes();
-    // Simulate minor latency fluctuations for realism
+    // Latency fluctuation simulation
     const interval = setInterval(() => {
-      setNodes(prev => 
+      setNodes(prev =>
         prev.map(n => ({
           ...n,
           latency: Math.max(5, n.latency + Math.floor(Math.random() * 9) - 4)
@@ -59,7 +60,7 @@ export default function Nodes() {
       {/* Title Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-100 tracking-wide">NETWORK PEER TOPOLOGY</h2>
+          <h2 className="text-2xl font-bold text-slate-100 tracking-wide font-mono">NETWORK PEER TOPOLOGY</h2>
           <p className="text-xs text-slate-500 font-mono font-semibold uppercase tracking-wider mt-1">Decentralized P2P node connections</p>
         </div>
         <button
@@ -71,87 +72,13 @@ export default function Nodes() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Interactive Topology Visualizer Map */}
-        <div className="lg:col-span-2 cyber-glass border border-white/5 rounded-2xl p-6 relative overflow-hidden h-[420px] flex items-center justify-center">
-          {/* Cyber mesh grid background */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.06)_0%,transparent_70%)] pointer-events-none" />
-          
-          {/* Constellation SVG lines overlay */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-            {/* Center Node connections */}
-            <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="rgba(6,182,212,0.15)" strokeWidth="1.5" strokeDasharray="5,5" className="animate-pulse" />
-            <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="rgba(6,182,212,0.15)" strokeWidth="1.5" />
-            <line x1="50%" y1="50%" x2="20%" y2="70%" stroke="rgba(6,182,212,0.15)" strokeWidth="1.5" />
-            <line x1="50%" y1="50%" x2="80%" y2="68%" stroke="rgba(6,182,212,0.15)" strokeWidth="1.5" strokeDasharray="5,5" />
-            
-            {/* Secondary links */}
-            <line x1="25%" y1="25%" x2="20%" y2="70%" stroke="rgba(139,92,246,0.1)" strokeWidth="1" />
-            <line x1="75%" y1="25%" x2="80%" y2="68%" stroke="rgba(139,92,246,0.1)" strokeWidth="1" />
-          </svg>
-
-          {/* Node Anchors (styled floating divs) */}
-          {/* Center (Current Host Node) */}
-          <div 
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 cursor-pointer"
-            onClick={() => setSelectedNode({ name: "Local Host Console", address: "127.0.0.1:8080", latency: 0, status: "ONLINE", id: "host" })}
-          >
-            <div className="w-14 h-14 rounded-2xl bg-cyber-cyan/10 border-2 border-cyber-cyan flex items-center justify-center shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:scale-110 transition-transform">
-              <Cpu className="text-cyber-cyan w-6 h-6 animate-pulse" />
-            </div>
-            <span className="text-[10px] font-mono font-bold text-slate-300 block mt-2">HOST CORE</span>
-          </div>
-
-          {/* Node 1 */}
-          {nodes[0] && (
-            <div 
-              className="absolute left-[25%] top-[25%] -translate-x-1/2 -translate-y-1/2 text-center z-10 cursor-pointer"
-              onClick={() => setSelectedNode(nodes[0])}
-            >
-              <div className="w-9 h-9 rounded-xl bg-slate-950 border border-cyber-cyan/35 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:scale-110 transition-transform">
-                <Globe className="text-cyber-cyan w-4.5 h-4.5" />
-              </div>
-              <span className="text-[9px] font-mono text-slate-400 block mt-1.5">{nodes[0].name}</span>
-            </div>
-          )}
-
-          {/* Node 2 */}
-          {nodes[1] && (
-            <div 
-              className="absolute left-[75%] top-[25%] -translate-x-1/2 -translate-y-1/2 text-center z-10 cursor-pointer"
-              onClick={() => setSelectedNode(nodes[1])}
-            >
-              <div className="w-9 h-9 rounded-xl bg-slate-950 border border-cyber-cyan/35 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:scale-110 transition-transform">
-                <Globe className="text-cyber-cyan w-4.5 h-4.5" />
-              </div>
-              <span className="text-[9px] font-mono text-slate-400 block mt-1.5">{nodes[1].name}</span>
-            </div>
-          )}
-
-          {/* Node 3 */}
-          {nodes[2] && (
-            <div 
-              className="absolute left-[20%] top-[70%] -translate-x-1/2 -translate-y-1/2 text-center z-10 cursor-pointer"
-              onClick={() => setSelectedNode(nodes[2])}
-            >
-              <div className="w-9 h-9 rounded-xl bg-slate-950 border border-cyber-cyan/35 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:scale-110 transition-transform">
-                <Globe className="text-cyber-cyan w-4.5 h-4.5" />
-              </div>
-              <span className="text-[9px] font-mono text-slate-400 block mt-1.5">{nodes[2].name}</span>
-            </div>
-          )}
-
-          {/* Node 4 */}
-          {nodes[3] && (
-            <div 
-              className="absolute left-[80%] top-[68%] -translate-x-1/2 -translate-y-1/2 text-center z-10 cursor-pointer"
-              onClick={() => setSelectedNode(nodes[3])}
-            >
-              <div className="w-9 h-9 rounded-xl bg-slate-950 border border-cyber-purple/30 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.1)] hover:scale-110 transition-transform">
-                <Globe className="text-cyber-purple w-4.5 h-4.5" />
-              </div>
-              <span className="text-[9px] font-mono text-slate-400 block mt-1.5">{nodes[3].name}</span>
-            </div>
-          )}
+        {/* Real Live-Map Visualizer */}
+        <div className="lg:col-span-2 cyber-glass border border-white/5 rounded-2xl p-4 relative overflow-hidden h-[420px]">
+          <LiveWorldMap
+            nodes={nodes}
+            selectedNode={selectedNode}
+            onSelectNode={setSelectedNode}
+          />
         </div>
 
         {/* Node details and Add Node card */}
@@ -185,11 +112,11 @@ export default function Nodes() {
                 </div>
               ) : (
                 <div className="text-center py-6 text-slate-600 font-mono text-xs">
-                  Click on map nodes to view configuration parameters
+                  Click on map markers to view configuration parameters
                 </div>
               )}
             </div>
-            
+
             {selectedNode && (
               <div className="mt-4 pt-3 border-t border-white/5 flex justify-end">
                 <button
@@ -205,7 +132,7 @@ export default function Nodes() {
           {/* Add Node Register */}
           <div className="cyber-glass border border-white/5 rounded-2xl p-6">
             <h4 className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-4 border-b border-white/5 pb-2">Register Peer Node</h4>
-            
+
             <form onSubmit={handleAddNode} className="space-y-4">
               <div>
                 <label className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-1.5">Peer Address / Port</label>
@@ -272,7 +199,7 @@ export default function Nodes() {
                 <td className="text-cyber-emerald font-semibold">0 ms (Host)</td>
                 <td className="text-right py-3.5">
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyber-emerald/15 text-cyber-emerald border border-cyber-emerald/25">
-                    <CheckCircle className="w-3 h-3" /> HOST
+                    <CheckCircle className="w-3.5 h-3.5" /> HOST
                   </span>
                 </td>
               </tr>
@@ -287,11 +214,11 @@ export default function Nodes() {
                   <td className="text-right py-3.5">
                     {node.status === "ONLINE" ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyber-emerald/15 text-cyber-emerald border border-cyber-emerald/25">
-                        <CheckCircle className="w-3 h-3" /> SYNCED
+                        <CheckCircle className="w-3.5 h-3.5" /> SYNCED
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyber-cyan/15 text-cyber-cyan border border-cyber-cyan/25 animate-pulse">
-                        <RefreshCw className="w-3 h-3" /> SYNCING
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin" /> SYNCING
                       </span>
                     )}
                   </td>
@@ -304,4 +231,3 @@ export default function Nodes() {
     </div>
   );
 }
-

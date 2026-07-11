@@ -2,6 +2,7 @@ import { useState } from "react";
 import { formatHash } from "../../utils/formatHash";
 import { Copy, Clock, Hash, ShieldAlert, ShieldCheck, CheckCircle2, ChevronDown, ChevronUp, Cpu, Award } from "lucide-react";
 import toast from "react-hot-toast";
+import MerkleTree from "./MerkleTree";
 
 export default function BlockCard({ block, isValidating, isTampered }) {
   const [expanded, setExpanded] = useState(false);
@@ -70,7 +71,7 @@ export default function BlockCard({ block, isValidating, isTampered }) {
           <span className="text-slate-500 flex items-center gap-1"><ChevronDown className="w-3 h-3 text-slate-600" /> Prev Hash</span>
           <div className="flex items-center gap-2">
             <span className="text-slate-400 text-[10px]">{formatHash(block.previousHash)}</span>
-            {block.previousHash.startsWith("0000") && (
+            {block.previousHash && block.previousHash.startsWith("0000") && (
               <button
                 onClick={() => copyToClipboard(block.previousHash, "Previous Hash")}
                 className="text-slate-600 hover:text-cyber-cyan p-1 hover:bg-white/5 rounded-md transition-all"
@@ -88,7 +89,7 @@ export default function BlockCard({ block, isValidating, isTampered }) {
           </div>
           <div className="flex justify-between items-center">
             <span className="text-slate-500 flex items-center gap-1"><Award className="w-3 h-3 text-cyber-rose" /> Difficulty</span>
-            <span className="text-cyber-cyan font-bold">{block.difficulty}</span>
+            <span className="text-cyber-cyan font-bold">{block.difficulty ?? 4}</span>
           </div>
         </div>
       </div>
@@ -106,8 +107,12 @@ export default function BlockCard({ block, isValidating, isTampered }) {
 
           {/* Transactions ledger drop-down */}
           {expanded && (
-            <div className="px-5 pb-4 space-y-2.5 font-mono text-[10px]">
-              {block.transactions.map((tx, idx) => (
+            <div className="px-5 pb-4 space-y-4 font-mono text-[10px]">
+              {/* Interactive Merkle Tree visualization */}
+              <MerkleTree transactions={block.transactions} />
+              
+              <div className="space-y-2.5">
+                {block.transactions.map((tx, idx) => (
                 <div key={idx} className="p-2.5 rounded-lg border border-white/5 bg-slate-950/40 space-y-1">
                   <div className="flex justify-between font-semibold">
                     <span className="text-cyber-purple">TX #{idx + 1}</span>
@@ -123,6 +128,7 @@ export default function BlockCard({ block, isValidating, isTampered }) {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           )}
         </div>

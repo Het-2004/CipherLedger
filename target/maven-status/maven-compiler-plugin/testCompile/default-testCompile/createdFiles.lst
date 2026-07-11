@@ -1,4 +1,2 @@
 com\het\cipherledger\BlockTest.class
-com\het\cipherledger\TransactionTest.class
-com\het\cipherledger\BlockchainTest.class
 com\het\cipherledger\WalletTest.class

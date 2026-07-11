@@ -4,6 +4,7 @@ import { mineBlock } from "../../api/miningApi";
 import { Zap, Play, Square, Award, Compass, Cpu, CheckCircle } from "lucide-react";
 import { simpleHash, mockBlockchain } from "../../utils/mockBlockchain";
 import toast from "react-hot-toast";
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from "recharts";
 
 export default function MiningPanel() {
   const [isMining, setIsMining] = useState(false);
@@ -11,10 +12,11 @@ export default function MiningPanel() {
   const [nonce, setNonce] = useState(0);
   const [hash, setHash] = useState("");
   const [hashRate, setHashRate] = useState(0);
+  const [hashHistory, setHashHistory] = useState([]);
   const [minedBlocks, setMinedBlocks] = useState(0);
   const [terminalLogs, setTerminalLogs] = useState([]);
   
-  const terminalEndRef = useRef(null);
+  const terminalContainerRef = useRef(null);
   const miningIntervalRef = useRef(null);
   const speedRef = useRef(100); // ms per tick
 
@@ -27,8 +29,8 @@ export default function MiningPanel() {
   };
 
   useEffect(() => {
-    if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (terminalContainerRef.current) {
+      terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
     }
   }, [terminalLogs]);
 
@@ -38,6 +40,25 @@ export default function MiningPanel() {
       if (miningIntervalRef.current) clearInterval(miningIntervalRef.current);
     };
   }, []);
+
+  // Dynamic hash rate recording over time
+  useEffect(() => {
+    if (!isMining) {
+      setHashHistory([]);
+      return;
+    }
+    const interval = setInterval(() => {
+      setHashHistory(prev => {
+        const next = [...prev, {
+          time: new Date().toLocaleTimeString().split(" ")[0].substring(3),
+          rate: hashRate || Math.floor(Math.random() * 200) + 1150
+        }];
+        if (next.length > 12) next.shift();
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isMining, hashRate]);
 
   const handleStartMining = async () => {
     if (isMining) {
@@ -185,6 +206,34 @@ export default function MiningPanel() {
             <h3 className="text-sm font-bold text-slate-200">Local Mining Engine</h3>
             <p className="text-xs text-slate-500 font-mono">Discovered Blocks: <span className="text-cyber-emerald font-bold">{minedBlocks}</span></p>
           </div>
+
+          {/* Real-time Hash Rate Fluctuations Chart */}
+          {isMining && hashHistory.length > 0 && (
+            <div className="w-full mt-6 pt-4 border-t border-white/5 space-y-2">
+              <span className="block text-[8px] font-mono font-bold text-slate-500 uppercase tracking-widest text-center">
+                ASIC REACTOR PERFORMANCE (H/s)
+              </span>
+              <div className="h-20 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={hashHistory} margin={{ top: 2, right: 2, left: -25, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="miningCyan" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.2}/>
+                        <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <XAxis dataKey="time" hide />
+                    <YAxis domain={['auto', 'auto']} tickStyle={{ fill: '#475569', fontSize: 7, fontFamily: 'monospace' }} axisLine={false} tickLine={false} />
+                    <Tooltip 
+                      contentStyle={{ background: '#090d16', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '6px', fontSize: '9px', fontFamily: 'monospace' }}
+                      labelStyle={{ color: '#06b6d4' }}
+                    />
+                    <Area type="monotone" dataKey="rate" stroke="#06b6d4" strokeWidth={1.5} fillOpacity={1} fill="url(#miningCyan)" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Console logs and statistics */}
@@ -244,7 +293,7 @@ export default function MiningPanel() {
           {/* Running Terminal log output */}
           <div className="cyber-glass border border-white/5 rounded-2xl p-6 h-60 flex flex-col">
             <h4 className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-3 border-b border-white/5 pb-2">Hash Output Stream</h4>
-            <div className="flex-1 overflow-y-auto font-mono text-[10px] text-slate-400 space-y-1.5 pr-2 scrollbar-thin">
+            <div ref={terminalContainerRef} className="flex-1 overflow-y-auto font-mono text-[10px] text-slate-400 space-y-1.5 pr-2 scrollbar-thin">
               {terminalLogs.length === 0 ? (
                 <div className="h-full flex items-center justify-center text-slate-600">
                   Mining engine idle. Press Start to initiate.
@@ -257,7 +306,6 @@ export default function MiningPanel() {
                   </div>
                 ))
               )}
-              <div ref={terminalEndRef} />
             </div>
           </div>
         </div>

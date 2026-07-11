@@ -28,11 +28,14 @@ export default function Transactions() {
 
   const filteredTxs = txs.filter(t => {
     const query = searchQuery.toLowerCase();
+    const txId = (t.id || t.transactionId || "").toLowerCase();
+    const txSender = (typeof t.sender === "string" ? t.sender : "").toLowerCase();
+    const txReceiver = (typeof t.receiver === "string" ? t.receiver : "").toLowerCase();
     return (
-      t.id.toLowerCase().includes(query) ||
-      t.sender.toLowerCase().includes(query) ||
-      t.receiver.toLowerCase().includes(query) ||
-      t.amount.toString().includes(query)
+      txId.includes(query) ||
+      txSender.includes(query) ||
+      txReceiver.includes(query) ||
+      (t.amount ?? 0).toString().includes(query)
     );
   });
 
@@ -93,29 +96,32 @@ export default function Transactions() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {filteredTxs.map((tx) => {
-                  const isHostSender = tx.sender === currentWallet;
-                  const isHostReceiver = tx.receiver === currentWallet;
+                {filteredTxs.map((tx, idx) => {
+                  const txId = tx.id || tx.transactionId || `tx-${idx}`;
+                  const txSender = typeof tx.sender === "string" ? tx.sender : "UNKNOWN";
+                  const txReceiver = typeof tx.receiver === "string" ? tx.receiver : "UNKNOWN";
+                  const isHostSender = txSender === currentWallet;
+                  const isHostReceiver = txReceiver === currentWallet;
                   
                   return (
-                    <tr key={tx.id} className="text-slate-300 hover:bg-white/1 transition-all">
+                    <tr key={txId} className="text-slate-300 hover:bg-white/1 transition-all">
                       <td className="py-3.5 text-cyber-cyan font-bold flex items-center gap-1.5">
-                        <span className="truncate max-w-[80px]">{tx.id}</span>
+                        <span className="truncate max-w-[80px]">{txId}</span>
                         <button
-                          onClick={() => copyToClipboard(tx.id, "Tx ID")}
+                          onClick={() => copyToClipboard(txId, "Tx ID")}
                           className="text-slate-600 hover:text-cyber-cyan p-0.5 hover:bg-white/5 rounded transition-all bg-transparent border-0 cursor-pointer"
                         >
                           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
                         </button>
                       </td>
                       <td className={isHostSender ? "text-cyber-cyan font-semibold" : ""}>
-                        <span className="truncate max-w-[120px] inline-block align-middle">{tx.sender}</span>
+                        <span className="truncate max-w-[120px] inline-block align-middle">{txSender}</span>
                       </td>
                       <td className={isHostReceiver ? "text-cyber-cyan font-semibold" : ""}>
-                        <span className="truncate max-w-[120px] inline-block align-middle">{tx.receiver}</span>
+                        <span className="truncate max-w-[120px] inline-block align-middle">{txReceiver}</span>
                       </td>
                       <td className="font-bold py-3.5">
-                        <span className={tx.sender === "SYSTEM" || tx.sender === "CLD-SYSTEM" ? "text-cyber-emerald" : isHostSender ? "text-cyber-rose" : "text-cyber-emerald"}>
+                        <span className={txSender === "SYSTEM" || txSender === "CLD-SYSTEM" ? "text-cyber-emerald" : isHostSender ? "text-cyber-rose" : "text-cyber-emerald"}>
                           {tx.amount} CLD
                         </span>
                       </td>

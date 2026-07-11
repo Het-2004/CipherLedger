@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { sendTransaction } from "../../api/transactionApi";
 import { getBalance } from "../../api/walletApi";
-import { Copy, Eye, EyeOff, Send, QrCode, ArrowDownLeft, ShieldCheck, Key, RefreshCw, Layers } from "lucide-react";
+import { Copy, Eye, EyeOff, Send, QrCode, ArrowDownLeft, ShieldCheck, Key, RefreshCw, Layers, Users } from "lucide-react";
 import toast from "react-hot-toast";
 import { formatHash } from "../../utils/formatHash";
 import { mockBlockchain } from "../../utils/mockBlockchain";
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from "recharts";
 
 export default function WalletCard({ wallet, onRefresh }) {
   const [showPrivateKey, setShowPrivateKey] = useState(false);
@@ -30,6 +31,40 @@ export default function WalletCard({ wallet, onRefresh }) {
   useEffect(() => {
     loadTxHistory();
   }, [wallet]);
+
+  const contacts = [
+    { name: "Alice (Validator)", address: "CLD_ALICE9A2BF3EF56D932C1A890F" },
+    { name: "Bob (Market-Maker)", address: "CLD_BOB41FD29C8B56A9D284B318" },
+    { name: "Charlie (Escrow Relay)", address: "CLD_CHARLIE932E520A8D9183C90" },
+    { name: "David (Anchor Node)", address: "CLD_DAVID78A3F29C1B2E3D4E5" }
+  ];
+
+  const getBalanceChartData = () => {
+    if (!wallet) return [];
+    let current = wallet.balance || 0;
+    const points = [];
+    points.push({ name: "Current", balance: current });
+    
+    let balanceTracker = current;
+    for (let i = 0; i < txHistory.length; i++) {
+      const tx = txHistory[i];
+      const isSent = tx.sender === wallet.address;
+      if (isSent) {
+        balanceTracker += tx.amount;
+      } else {
+        balanceTracker -= tx.amount;
+      }
+      points.unshift({
+        name: new Date(tx.timestamp).toLocaleTimeString().substring(0, 5),
+        balance: Math.max(0, balanceTracker)
+      });
+    }
+    
+    if (points.length === 1) {
+      points.unshift({ name: "Genesis", balance: Math.max(0, current - 150) });
+    }
+    return points;
+  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -187,6 +222,32 @@ export default function WalletCard({ wallet, onRefresh }) {
               </div>
             </div>
           </div>
+
+          {/* Balance History Line Chart */}
+          <div className="pt-4 border-t border-white/5 space-y-2">
+            <span className="block text-[8px] font-mono font-bold text-slate-500 uppercase tracking-widest text-center">
+              CLD CRYPTO ASSET BALANCE HISTORY
+            </span>
+            <div className="h-24 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={getBalanceChartData()} margin={{ top: 2, right: 2, left: -25, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="balancePurple" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="name" hide />
+                  <YAxis tickStyle={{ fill: '#475569', fontSize: 7, fontFamily: 'monospace' }} axisLine={false} tickLine={false} />
+                  <Tooltip 
+                    contentStyle={{ background: '#090d16', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '6px', fontSize: '9px', fontFamily: 'monospace' }}
+                    labelStyle={{ color: '#8b5cf6' }}
+                  />
+                  <Area type="monotone" dataKey="balance" stroke="#8b5cf6" strokeWidth={1.5} fillOpacity={1} fill="url(#balancePurple)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -197,6 +258,27 @@ export default function WalletCard({ wallet, onRefresh }) {
             <h4 className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-4 border-b border-white/5 pb-2">Funds Transfer Terminal</h4>
             
             <form onSubmit={handleSend} className="space-y-4">
+              <div>
+                <label className="block text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                  <Users className="w-3 h-3 text-cyber-purple" /> VERIFIED ADDRESS BOOK
+                </label>
+                <div className="grid grid-cols-2 gap-1.5 mb-3">
+                  {contacts.map((c, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setRecipient(c.address)}
+                      className={`text-[8px] font-mono py-1 px-1.5 rounded bg-slate-900/60 border hover:border-cyber-purple/40 text-left truncate transition-all cursor-pointer ${
+                        recipient === c.address ? "border-cyber-purple text-cyber-purple font-semibold bg-cyber-purple/5" : "border-white/5 text-slate-400"
+                      }`}
+                      title={c.name}
+                    >
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-1.5">Destination Address</label>
                 <input

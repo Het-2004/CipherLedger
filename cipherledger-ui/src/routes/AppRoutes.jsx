@@ -7,6 +7,7 @@ import Wallet from "../pages/Wallet";
 import Transactions from "../pages/Transactions";
 import Nodes from "../pages/Nodes";
 import Login from "../pages/Login";
+import CryptoPlayground from "../pages/CryptoPlayground";
 import { Toaster } from "react-hot-toast";
 
 export default function AppRoutes() {
@@ -20,6 +21,7 @@ export default function AppRoutes() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/nodes" element={<Nodes />} />
+          <Route path="/crypto-playground" element={<CryptoPlayground />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>
