@@ -18,7 +18,7 @@ public class TransactionTest {
         Wallet sender = manager.createWallet();
         Wallet receiver = manager.createWallet();
 
-        Transaction transaction = new Transaction(sender.getAddress(), receiver.getAddress(), 500);
+        Transaction transaction = new Transaction(sender.getAddress(), receiver.getAddress(), 500, 0.00001, 21000);
         transaction.generateSignature(sender.getPrivateKey());
         assertNotNull(transaction.getTransactionId());
         assertEquals(500, transaction.getAmount());

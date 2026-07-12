@@ -1,2 +1,8 @@
+com\het\cipherledger\consensus\ConsensusTests.class
+com\het\cipherledger\TransactionTest.class
+com\het\cipherledger\vm\CLVMTest.class
+com\het\cipherledger\TokenEngineTest.class
 com\het\cipherledger\BlockTest.class
+com\het\cipherledger\ContractEngineTest.class
+com\het\cipherledger\BlockchainTest.class
 com\het\cipherledger\WalletTest.class

@@ -80,6 +80,13 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
       <version>1.78.1</version>
     </dependency>
 
+    <!-- Rhino JS Engine for Smart Contract Execution -->
+    <dependency>
+      <groupId>org.mozilla</groupId>
+      <artifactId>rhino-engine</artifactId>
+      <version>1.7.14</version>
+    </dependency>
+
   </dependencies>
 
   <build>

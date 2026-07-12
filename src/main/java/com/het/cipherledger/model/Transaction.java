@@ -11,24 +11,28 @@ public class Transaction {
     private String sender;
     private String receiver;
     private double amount;
+    private double gasPrice;
+    private long gasLimit;
     private byte[] signature;
 
     public Transaction() {
     }
 
-    public Transaction(String sender, String receiver, double amount) {
+    public Transaction(String sender, String receiver, double amount, double gasPrice, long gasLimit) {
         this.sender = sender;
         this.receiver = receiver;
         this.amount = amount;
+        this.gasPrice = gasPrice;
+        this.gasLimit = gasLimit;
         this.transactionId = calculateHash();
     }
 
     private String calculateHash() {
-        return HashUtil.generateHash(sender + receiver + amount);
+        return HashUtil.generateHash(sender + receiver + amount + gasPrice + gasLimit);
     }
 
     public void generateSignature(PrivateKey privateKey) {
-        String data = sender + receiver + amount;
+        String data = sender + receiver + amount + gasPrice + gasLimit;
         signature = SignatureUtil.sign(data, privateKey);
     }
 
@@ -74,5 +78,21 @@ public class Transaction {
 
     public void setSignature(byte[] signature) {
         this.signature = signature;
+    }
+
+    public double getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(double gasPrice) {
+        this.gasPrice = gasPrice;
+    }
+
+    public long getGasLimit() {
+        return gasLimit;
+    }
+
+    public void setGasLimit(long gasLimit) {
+        this.gasLimit = gasLimit;
     }
 }
