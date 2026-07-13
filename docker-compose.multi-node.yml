@@ -7,13 +7,21 @@ services:
     ports:
       - "27017:27017"
 
+  redis:
+    image: redis:latest
+    container_name: cipher_redis
+    ports:
+      - "6379:6379"
+
   seed-node:
     build: .
     container_name: cipher_seed
     depends_on:
       - mongo
+      - redis
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger
+      - SPRING_DATA_REDIS_HOST=redis
       - SERVER_PORT=8080
       - CIPHERLEDGER_P2P_PORT=9000
     ports:
@@ -25,8 +33,10 @@ services:
     container_name: cipher_miner_1
     depends_on:
       - seed-node
+      - redis
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger_miner1
+      - SPRING_DATA_REDIS_HOST=redis
       - SERVER_PORT=8081
       - CIPHERLEDGER_P2P_PORT=9001
       - CIPHERLEDGER_P2P_SEEDS=seed-node:9000
@@ -39,8 +49,10 @@ services:
     container_name: cipher_miner_2
     depends_on:
       - seed-node
+      - redis
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger_miner2
+      - SPRING_DATA_REDIS_HOST=redis
       - SERVER_PORT=8082
       - CIPHERLEDGER_P2P_PORT=9002
       - CIPHERLEDGER_P2P_SEEDS=seed-node:9000
