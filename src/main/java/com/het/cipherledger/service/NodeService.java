@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,8 @@ public class NodeService {
     @Value("${cipherledger.p2p.port:9000}")
     private int port;
     
-    @Value("${cipherledger.p2p.seeds:}")
+    // Must match the property key in application.properties exactly
+    @Value("${cipherledger.p2p.seed-nodes:}")
     private String seeds;
 
     private final Map<String, Peer> peers = new ConcurrentHashMap<>();
@@ -33,20 +36,45 @@ public class NodeService {
 
     @PostConstruct
     public void bootstrapNetwork() {
-        if (seeds != null && !seeds.isEmpty()) {
-            String[] seedNodes = seeds.split(",");
-            for (String seed : seedNodes) {
-                if (!seed.trim().isEmpty()) {
-                    System.out.println("Connecting to seed node: " + seed.trim());
-                    // Send handshake to seed
-                    P2PMessage handshake = new P2PMessage(P2PMessage.MessageType.HANDSHAKE, null, "localhost:" + port);
-                    p2pClient.sendMessage(seed.trim(), handshake);
-                    
-                    // Request chain from seed
-                    P2PMessage reqChain = new P2PMessage(P2PMessage.MessageType.REQ_CHAIN, null, "localhost:" + port);
-                    p2pClient.sendMessage(seed.trim(), reqChain);
-                }
+        if (seeds == null || seeds.isBlank()) {
+            System.out.println("[P2P] No seed nodes configured. Running as standalone node.");
+            return;
+        }
+        String[] seedNodes = seeds.split(",");
+        for (String seed : seedNodes) {
+            String address = seed.trim();
+            if (address.isEmpty()) continue;
+
+            // Pre-flight reachability check — avoids Connection Refused noise
+            if (!canReach(address)) {
+                System.out.println("[P2P] Seed node unreachable (not running?): " + address + " — skipping.");
+                continue;
             }
+
+            System.out.println("[P2P] Connecting to seed node: " + address);
+            P2PMessage handshake = new P2PMessage(P2PMessage.MessageType.HANDSHAKE, null, "localhost:" + port);
+            p2pClient.sendMessage(address, handshake);
+
+            P2PMessage reqChain = new P2PMessage(P2PMessage.MessageType.REQ_CHAIN, null, "localhost:" + port);
+            p2pClient.sendMessage(address, reqChain);
+        }
+    }
+
+    /**
+     * Quick TCP reachability check with a 1-second timeout.
+     * Returns false instead of throwing Connection Refused.
+     */
+    private boolean canReach(String address) {
+        try {
+            String[] parts = address.split(":");
+            String host = parts[0];
+            int p = Integer.parseInt(parts[1]);
+            try (Socket s = new Socket()) {
+                s.connect(new InetSocketAddress(host, p), 1000);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -96,12 +124,23 @@ public class NodeService {
         gossipMessage(msg);
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 15000)
     public void pingPeers() {
-        List<Peer> activePeers = getPeers();
+        if (peers.isEmpty()) return;
         P2PMessage ping = new P2PMessage(P2PMessage.MessageType.PING, null, "localhost:" + port);
-        for (Peer peer : activePeers) {
-            p2pClient.sendMessage(peer.getAddress(), ping);
+        List<String> toRemove = new ArrayList<>();
+
+        for (Peer peer : peers.values()) {
+            if (canReach(peer.getAddress())) {
+                peer.setStatus("ONLINE");
+                p2pClient.sendMessage(peer.getAddress(), ping);
+            } else {
+                peer.setStatus("OFFLINE");
+                toRemove.add(peer.getAddress());
+                System.out.println("[P2P] Peer unreachable, removing: " + peer.getAddress());
+            }
         }
+        // Evict dead peers so we never retry them
+        toRemove.forEach(peers::remove);
     }
 }
