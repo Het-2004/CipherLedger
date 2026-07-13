@@ -271,9 +271,9 @@ export default function EnterpriseDashboard() {
                   <div className="bg-slate-900 border border-white/10 rounded-xl p-4 font-mono text-xs text-cyber-cyan overflow-x-auto max-h-[50vh] space-y-2">
                     <div># HELP jvm_memory_used_bytes The amount of used memory</div>
                     <div># TYPE jvm_memory_used_bytes gauge</div>
-                    <div className="text-slate-200">jvm_memory_used_bytes{{area="heap",id="G1 Survivor Space"}} 2.4518E7</div>
-                    <div className="text-slate-200">jvm_memory_used_bytes{{area="heap",id="G1 Old Gen"}} 1.4820E8</div>
-                    <div className="text-slate-200">jvm_memory_used_bytes{{area="nonheap",id="Metaspace"}} 5.2409E7</div>
+                    <div className="text-slate-200">{"jvm_memory_used_bytes{area=\"heap\",id=\"G1 Survivor Space\"} 2.4518E7"}</div>
+                    <div className="text-slate-200">{"jvm_memory_used_bytes{area=\"heap\",id=\"G1 Old Gen\"} 1.4820E8"}</div>
+                    <div className="text-slate-200">{"jvm_memory_used_bytes{area=\"nonheap\",id=\"Metaspace\"} 5.2409E7"}</div>
                     
                     <div className="pt-2"># HELP jvm_threads_live_threads The current number of live threads</div>
                     <div># TYPE jvm_threads_live_threads gauge</div>
