@@ -1,8 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import { Bell, Volume2, VolumeX, LogOut, ShieldAlert, Cpu, CheckCircle } from "lucide-react";
+import { Bell, Volume2, VolumeX, LogOut } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { mockBlockchain } from "../../utils/mockBlockchain";
 import toast from "react-hot-toast";
+import BrandMark from "../brand/BrandMark";
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
@@ -89,11 +90,7 @@ export default function Navbar() {
       className="h-20 border-b border-white/5 bg-slate-950/60 backdrop-blur-md flex items-center justify-between px-8 relative z-20"
     >
       <div className="flex items-center gap-4">
-        <h1 className="font-semibold text-lg tracking-wider text-slate-100 flex items-center gap-2">
-          <Cpu className="text-cyber-cyan w-5 h-5 animate-pulse" />
-          CIPHER<span className="text-cyber-cyan font-bold">LEDGER</span>
-          <span className="text-[10px] text-slate-500 font-mono">v1.0.0</span>
-        </h1>
+        <BrandMark title="CipherLedger" subtitle="v1.0.0" size="sm" />
 
         {/* Network Connection Badge */}
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium border bg-slate-900/60 transition-all duration-300">

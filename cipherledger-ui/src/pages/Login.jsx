@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { login, register } from "../api/authApi";
-import { Terminal, Shield, Key, User, Activity } from "lucide-react";
+import { Terminal, Key, User, Activity } from "lucide-react";
 import toast from "react-hot-toast";
+import BrandMark from "../components/brand/BrandMark";
 
 export default function Login() {
   const { setUser } = useContext(AuthContext);
@@ -71,9 +72,7 @@ export default function Login() {
       
       {/* Branding */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-cyber-cyan/10 border border-cyber-cyan/20 flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-          <Shield className="text-cyber-cyan w-6 h-6" />
-        </div>
+        <BrandMark title="CipherLedger" subtitle="Gateway" size="lg" showText={false} />
         <h2 className="text-xl font-bold tracking-wider text-slate-100">CIPHERLEDGER GATEWAY</h2>
         <p className="text-xs font-mono text-slate-500 font-semibold uppercase tracking-widest mt-1">Operator Authorization</p>
       </div>
