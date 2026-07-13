@@ -1,9 +1,9 @@
 package com.het.cipherledger.crypto;
 
-import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class JwtUtil {
@@ -43,7 +43,7 @@ public class JwtUtil {
                 hexString.append(hex);
             }
             return hexString.toString();
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing password", e);
         }
     }

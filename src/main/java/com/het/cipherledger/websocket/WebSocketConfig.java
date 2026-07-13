@@ -18,7 +18,7 @@ public class WebSocketConfig
     @Override
 
     public void configureMessageBroker(
-            MessageBrokerRegistry config
+            @org.springframework.lang.NonNull MessageBrokerRegistry config
     ){
 
 
@@ -39,7 +39,7 @@ public class WebSocketConfig
     @Override
 
     public void registerStompEndpoints(
-            StompEndpointRegistry registry
+            @org.springframework.lang.NonNull StompEndpointRegistry registry
     ){
 
 
