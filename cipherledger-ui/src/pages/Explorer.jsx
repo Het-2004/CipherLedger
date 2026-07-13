@@ -39,7 +39,7 @@ export default function Explorer() {
 
   // Fetch initial local block data
   useEffect(() => {
-    fetch('http://localhost:8080/api/blocks')
+    fetch('http://localhost:8080/api/blockchain')
       .then(res => res.json())
       .then(data => setBlocks(data))
       .catch(err => console.error(err));
@@ -122,10 +122,22 @@ export default function Explorer() {
         }
       }
 
-      const res = await fetch(`http://localhost:8080/api/wallets/${searchQuery}/balance`);
-      if (res.ok) {
-        const data = await res.json();
-        setSearchResult(data);
+      const cldRes = await fetch(`http://localhost:8080/api/tokens/CLD/balance/${searchQuery}`);
+      if (cldRes.ok) {
+        const cldBalance = await cldRes.json();
+        const portfolio = { CLD: cldBalance };
+        
+        try {
+          const bridgeRes = await fetch(`http://localhost:8080/api/crosschain/bridge/balances/${searchQuery}`);
+          if (bridgeRes.ok) {
+            const bridgeBalances = await bridgeRes.json();
+            Object.assign(portfolio, bridgeBalances);
+          }
+        } catch (e) {
+          console.error("Could not fetch bridge balances", e);
+        }
+
+        setSearchResult(portfolio);
         setResultType('wallet');
       } else {
         setSearchResult({ error: "No records found on the ledger." });

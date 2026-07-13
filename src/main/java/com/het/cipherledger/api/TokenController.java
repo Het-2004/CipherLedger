@@ -9,6 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tokens")
+@CrossOrigin(origins = "*")
 public class TokenController {
 
     private final TokenEngine tokenEngine;

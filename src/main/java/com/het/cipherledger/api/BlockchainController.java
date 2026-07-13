@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blockchain")
+@CrossOrigin(origins = "*")
 public class BlockchainController {
     private final BlockchainService service;
     private final com.het.cipherledger.websocket.BlockSocketService socketService;

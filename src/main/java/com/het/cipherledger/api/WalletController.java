@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/wallet")
+@CrossOrigin(origins = "*")
 public class WalletController {
 
     private WalletManager manager = new WalletManager();
