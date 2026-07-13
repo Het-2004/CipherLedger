@@ -3,6 +3,7 @@ import { useLocation, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import { AuthContext } from "../../context/AuthContext";
+import GlobalAiChatbot from "../ai/GlobalAiChatbot";
 
 export default function Layout({ children }) {
   const { user } = useContext(AuthContext);
@@ -28,7 +29,7 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#020617] text-slate-100">
+    <div className="flex min-h-screen bg-[#020617] text-slate-100 relative">
       {/* Sidebar - fixed width */}
       <Sidebar />
 
@@ -39,6 +40,9 @@ export default function Layout({ children }) {
           {children}
         </main>
       </div>
+
+      {/* Floating Global Chatbot Widget */}
+      <GlobalAiChatbot />
     </div>
   );
 }
