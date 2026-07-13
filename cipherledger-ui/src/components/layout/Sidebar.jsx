@@ -5,14 +5,13 @@ import {
   Pickaxe,
   Wallet,
   Network,
-  Cpu,
-  Terminal,
   Activity,
   FileText,
   Key,
   Search,
   ShieldAlert
 } from "lucide-react";
+import BrandMark from "../brand/BrandMark";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -87,14 +86,8 @@ export default function Sidebar() {
     >
       <div className="flex-1 flex flex-col min-h-0">
         {/* Branding Title */}
-        <div className="flex items-center gap-3 mb-10 pl-2 shrink-0">
-          <div className="w-10 h-10 rounded-xl bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.15)] animate-pulse-slow">
-            <Terminal className="text-cyber-cyan w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-sm font-semibold tracking-wider text-slate-200">CIPHER CONSOLE</h2>
-            <p className="text-[10px] font-mono text-slate-500 font-bold tracking-widest uppercase">Decentralized UI</p>
-          </div>
+        <div className="mb-10 pl-2 shrink-0">
+          <BrandMark title="CipherLedger" subtitle="Decentralized UI" size="md" className="items-center" />
         </div>
 
         {/* Navigation links */}

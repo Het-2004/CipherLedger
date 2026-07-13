@@ -6,13 +6,13 @@ export default function BrandMark({
   className = "",
   iconSrc = "/logo.png",
 }) {
-  const iconSize = size === "sm" ? "w-10 h-10" : size === "lg" ? "w-16 h-16" : "w-12 h-12";
-  const titleClass = size === "sm" ? "text-sm" : size === "lg" ? "text-2xl" : "text-lg";
-  const subtitleClass = size === "sm" ? "text-[9px]" : "text-[10px]";
+  const iconSize = size === "sm" ? "w-12 h-12" : size === "lg" ? "w-20 h-20" : "w-16 h-16";
+  const titleClass = size === "sm" ? "text-base font-extrabold" : size === "lg" ? "text-2xl font-extrabold" : "text-lg font-extrabold";
+  const subtitleClass = size === "sm" ? "text-[10px]" : "text-[11px]";
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <div className={`${iconSize} shrink-0 rounded-2xl bg-slate-950/95 border border-white/10 shadow-[0_0_24px_rgba(6,182,212,0.12)] overflow-hidden p-1.5`}>
+      <div className={`${iconSize} shrink-0 rounded-2xl bg-slate-950/95 border border-white/10 shadow-[0_0_24px_rgba(6,182,212,0.18)] overflow-hidden p-1`}>
         <img
           src={iconSrc}
           alt="CipherLedger logo"
