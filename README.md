@@ -1,115 +1,178 @@
 <div align="center">
 
-<br/>
-
-```
- ██████╗██╗██████╗ ██╗  ██╗███████╗██████╗
-██╔════╝██║██╔══██╗██║  ██║██╔════╝██╔══██╗
-██║     ██║██████╔╝███████║█████╗  ██████╔╝
-██║     ██║██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗
-╚██████╗██║██║     ██║  ██║███████╗██║  ██║
- ╚═════╝╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-      L E D G E R  —  Enterprise Blockchain
-```
+<img src="assets/banner.png" alt="CipherLedger Banner" width="100%"/>
 
 <br/>
+<br/>
+
+<!-- CORE TECH BADGES -->
+<p>
+  <img src="https://img.shields.io/badge/Java-21-FF6B35?style=for-the-badge&logo=openjdk&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/React-18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/MongoDB-6.0-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Redis-7.0-DC382D?style=for-the-badge&logo=redis&logoColor=white"/>
+</p>
 
 <p>
-  <strong>A next-generation, enterprise-grade blockchain ecosystem<br/>engineered for performance, security, and developer excellence.</strong>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/License-MIT-8B5CF6?style=for-the-badge&logo=opensourceinitiative&logoColor=white"/>
+</p>
+
+<!-- STATUS BADGES -->
+<p>
+  <img src="https://img.shields.io/badge/Build-Passing-22c55e?style=flat-square&logo=github-actions&logoColor=white"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Consensus-PoW%20%7C%20PoS%20%7C%20DPoS%20%7C%20PBFT-6366f1?style=flat-square"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/CLVM-Turing%20Complete-0ea5e9?style=flat-square"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Version-1.0.0-f59e0b?style=flat-square"/>
 </p>
 
 <br/>
 
-<!-- BADGES -->
-<p>
-  <a href="https://github.com/Het-2004/CipherLedger/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-8b5cf6?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="License"/>
-  </a>
-  <img src="https://img.shields.io/badge/Java-21-f97316?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
-  <img src="https://img.shields.io/badge/Spring_Boot-3.x-6db33f?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot"/>
-  <img src="https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
-  <img src="https://img.shields.io/badge/Docker-Ready-2496ed?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-  <img src="https://img.shields.io/badge/Kubernetes-Supported-326ce5?style=for-the-badge&logo=kubernetes&logoColor=white" alt="Kubernetes"/>
-  <img src="https://img.shields.io/badge/MongoDB-Indexed-47a248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
-  <img src="https://img.shields.io/badge/Redis-Cache-dc382d?style=for-the-badge&logo=redis&logoColor=white" alt="Redis"/>
-</p>
+<h3>⛓️ Next-Generation Enterprise Blockchain Ecosystem ⛓️</h3>
+
+<p><em>Built from scratch in Java · Custom VM · Multi-Consensus · Native NFTs & Tokens · Full SDKs</em></p>
 
 <br/>
 
-<p>
-  <a href="#-overview">Overview</a> •
-  <a href="#-ecosystem">Ecosystem</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-architecture">Architecture</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-api-reference">API</a> •
-  <a href="#-documentation">Docs</a>
-</p>
-
-<br/>
-
----
+<a href="#-overview">Overview</a>&ensp;•&ensp;
+<a href="#-ecosystem">Ecosystem</a>&ensp;•&ensp;
+<a href="#-features">Features</a>&ensp;•&ensp;
+<a href="#-architecture">Architecture</a>&ensp;•&ensp;
+<a href="#-quick-start">Quick Start</a>&ensp;•&ensp;
+<a href="#-api-reference">API</a>&ensp;•&ensp;
+<a href="#-documentation">Docs</a>&ensp;•&ensp;
+<a href="#-contributing">Contribute</a>
 
 </div>
 
+---
+
 ## 🌌 Overview
 
-**CipherLedger** is a production-ready, modular blockchain platform designed for real-world enterprise deployment. Built entirely in **Java 21** with a **Spring Boot** backbone, it is a rare example of a feature-complete blockchain written from scratch — featuring its own Virtual Machine, multi-algorithm consensus, native NFT & Token protocols, and a rich developer SDK ecosystem.
+**CipherLedger** is a production-ready, modular blockchain platform built for real-world enterprise deployment. Engineered entirely from scratch in **Java 21** with **Spring Boot**, it is one of the few blockchain implementations that features:
 
-> **Why CipherLedger?** Most blockchain frameworks either sacrifice security for speed, or scalability for decentralization. CipherLedger breaks this trilemma through hot-swappable consensus engines, allowing a single network to dynamically choose the optimal strategy for its use case.
+- A **custom Virtual Machine (CLVM)** for smart contract execution
+- **4 hot-swappable consensus engines** — no restart required
+- **Native NFT & Token protocols** built into the core (no fragile wrapper contracts)
+- A **complete developer ecosystem** including Java SDK, JS SDK, UI Explorer, and a Browser Wallet Extension
 
-<br/>
-
-## 🧩 Ecosystem
-
-The CipherLedger project is a **monorepo** containing the following first-class components:
-
-| Component | Language | Description |
-|---|---|---|
-| **`/src`** (Core Node) | ☕ Java 21 | The blockchain engine: consensus, mining, CLVM, P2P, REST & WebSocket APIs |
-| **`cipherledger-ui`** | ⚛️ React 18 | Block explorer, wallet dashboard & enterprise analytics UI |
-| **`cipherledger-java-sdk`** | ☕ Java | Official Java client library for backend integrations |
-| **`cipherledger-js-sdk`** | 🟨 JavaScript | Official JavaScript/Node.js client library |
-| **`cipherledger-wallet-extension`** | 🌐 Browser | Chromium wallet extension for key management & signing |
-| **`k8s/`** | ⎈ YAML | Production Kubernetes deployment manifests |
-| **`config/`** | 📊 YAML | Prometheus & Grafana monitoring configuration |
-| **`docs/`** | 📚 Markdown | Deep-dive technical documentation |
+> 💡 **CipherLedger breaks the blockchain trilemma** by letting you choose the optimal consensus strategy — PoW for permissionless security, PBFT for instant enterprise finality, DPoS for ultra-high TPS.
 
 <br/>
 
 ---
 
-## ✨ Core Features
+## 🧩 Ecosystem
+
+<div align="center">
+
+| Component | Language | Description |
+|:---:|:---:|:---|
+| 🟧 **Core Node** (`/src`) | Java 21 | Blockchain engine: consensus, mining, CLVM, P2P, REST & WebSocket APIs |
+| ⚛️ **UI Explorer** (`cipherledger-ui`) | React 18 | Block explorer, wallet dashboard & enterprise analytics |
+| ☕ **Java SDK** (`cipherledger-java-sdk`) | Java 21 | Official Java client library for backend integrations |
+| 🟨 **JS SDK** (`cipherledger-js-sdk`) | JavaScript | Official JavaScript/Node.js client library |
+| 🌐 **Wallet Extension** (`cipherledger-wallet-extension`) | Browser | Chromium extension for key management & tx signing |
+| ⎈ **K8s Manifests** (`k8s/`) | YAML | Production-ready Kubernetes deployment configs |
+| 📊 **Monitoring** (`config/`) | YAML | Prometheus scrape config + Grafana dashboards |
+| 📚 **Docs** (`docs/`) | Markdown | Deep-dive technical documentation |
+
+</div>
+
+<br/>
+
+---
+
+## ✨ Features
 
 <br/>
 
 ### 🔀 Multi-Consensus Engine
-Hot-swap between four consensus algorithms **without restarting the network**:
-- **⛏ Proof of Work (PoW)** — Classic Nakamoto consensus with dynamic difficulty
-- **🏦 Proof of Stake (PoS)** — Energy-efficient staking with coin-age weighting
-- **🗳 Delegated Proof of Stake (DPoS)** — High-TPS governance by elected delegates
-- **🤝 PBFT** — Deterministic finality for enterprise consortiums
+
+Hot-swap between **four consensus algorithms** without network restarts:
+
+<div align="center">
+
+| ⛏️ Proof of Work | 🏦 Proof of Stake | 🗳️ Delegated PoS | 🤝 PBFT |
+|:---:|:---:|:---:|:---:|
+| Classic Nakamoto | Eco-friendly staking | Elected delegates | Byzantine fault tolerant |
+| Dynamic difficulty | Coin-age weighting | Ultra-high TPS | Instant finality |
+| Sybil-resistant | No energy waste | Democratic governance | Enterprise consortiums |
+
+</div>
+
+> Configure in `application.properties` → `blockchain.consensus.type=POW|POS|DPOS|PBFT`
+
+<br/>
 
 ### 💻 CipherLedger Virtual Machine (CLVM)
-A custom **stack-based, Turing-complete VM** that executes smart contract bytecode deterministically across all nodes. Features include:
-- ⛽ Gas metering to prevent infinite loops
-- 🔒 Fully sandboxed execution environment
-- 📡 Event emission system for dApp reactivity
 
-### 🪙 Native Token & NFT Protocol
-Fungible tokens and NFTs are **first-class citizens at the protocol level** — no fragile wrapper contracts needed:
-- Define tokens with custom symbol, supply, and decimals
-- Mint NFTs into collections with IPFS-backed metadata
-- Use the built-in **NFT Marketplace** engine for trustless trading
+A **stack-based, Turing-complete VM** purpose-built for deterministic smart contract execution:
 
-### 🔐 State-of-the-Art Cryptography
-| Primitive | Algorithm |
-|---|---|
-| Block & Tx Hashing | SHA-256 |
-| Digital Signatures | ECDSA (secp256k1) |
-| Address Encoding | Base58Check |
-| Block Integrity | Merkle Trees |
-| Auth Tokens | JWT (RS256) |
+```
+┌─────────────────────────────────────────────────────────┐
+│                    CLVM Execution                       │
+│                                                         │
+│  Bytecode Input → Parser → Opcode Executor              │
+│       ↓                         ↓                       │
+│  Gas Metering ←→ Stack Engine ←→ State Storage          │
+│       ↓                         ↓                       │
+│  Event Emitter              Result / Revert             │
+└─────────────────────────────────────────────────────────┘
+```
+
+- ⛽ **Gas metering** prevents halting-problem exploits
+- 🔒 **Fully sandboxed** — no host system access
+- 📡 **Event system** for real-time dApp reactivity
+- 🧮 Opcodes: `PUSH`, `ADD`, `SUB`, `MUL`, `STORE`, `LOAD`, `CALL` and more
+
+<br/>
+
+### 🪙 Native Digital Assets
+
+Tokens & NFTs are **first-class citizens** at the protocol layer:
+
+<div align="center">
+
+| 🟡 Fungible Tokens | 🎨 NFTs |
+|:---|:---|
+| Custom symbol, supply & decimals | Grouped into named Collections |
+| UTXO-based transfers (same security as native coins) | IPFS-backed metadata with on-chain proofs |
+| Atomic swaps supported | Built-in **NFT Marketplace** engine |
+
+</div>
+
+<br/>
+
+### 🔐 Cryptographic Primitives
+
+<div align="center">
+
+| Primitive | Algorithm | Purpose |
+|:---:|:---:|:---:|
+| **Hashing** | `SHA-256` | Block & transaction integrity |
+| **Signatures** | `ECDSA (secp256k1)` | Wallet key-pairs & tx signing |
+| **Address Encoding** | `Base58Check` | Human-readable addresses |
+| **Block Integrity** | `Merkle Trees` | Efficient state verification |
+| **Authentication** | `JWT (RS256)` | Secure API access |
+| **P2P Transport** | `TCP + WebSocket` | Node communication |
+
+</div>
 
 <br/>
 
@@ -120,15 +183,15 @@ Fungible tokens and NFTs are **first-class citizens at the protocol level** — 
 <div align="center">
 
 | Layer | Technologies |
-|---|---|
-| **Backend** | Java 21 · Spring Boot 3 · Maven |
-| **Database** | MongoDB · Redis |
-| **Frontend** | React 18 · Vite · React Router |
-| **Crypto** | BouncyCastle · SHA-256 · ECDSA |
-| **Networking** | Spring WebSocket · Custom TCP P2P |
-| **Monitoring** | Prometheus · Grafana · Logback |
-| **DevOps** | Docker · Docker Compose · Kubernetes |
-| **Testing** | JUnit 5 · Spring Test |
+|:---:|:---|
+| 🔷 **Backend** | Java 21 · Spring Boot 3 · Spring Security · Maven |
+| 🗄️ **Database** | MongoDB (block storage) · Redis (cache & state) |
+| ⚛️ **Frontend** | React 18 · Vite · React Router 6 |
+| 🔐 **Cryptography** | BouncyCastle · SHA-256 · ECDSA · Merkle Trees |
+| 🌐 **Networking** | Spring WebSocket · Custom TCP P2P Sockets |
+| 📊 **Monitoring** | Prometheus · Grafana · Logback · Spring Actuator |
+| 🐳 **DevOps** | Docker · Docker Compose · Kubernetes |
+| 🧪 **Testing** | JUnit 5 · Spring Test · Mockito |
 
 </div>
 
@@ -139,31 +202,37 @@ Fungible tokens and NFTs are **first-class citizens at the protocol level** — 
 ## 🏛 Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         CipherLedger Node                           │
-│                                                                     │
-│  ┌──────────────┐    ┌──────────────────────────────────────────┐  │
-│  │  REST / WS   │───▶│              API Layer                   │  │
-│  │    API       │    │  (AuthController, BlockchainController,   │  │
-│  └──────────────┘    │   TransactionController, NFTController)  │  │
-│                      └──────────────────┬───────────────────────┘  │
-│                                         │                           │
-│  ┌──────────────┐    ┌──────────────────▼───────────────────────┐  │
-│  │   P2P Peers  │───▶│             Service Layer                │  │
-│  │  (P2PServer  │    │  (BlockchainService, MiningOrchestrator, │  │
-│  │   P2PClient) │    │   TokenEngine, NFTEngine, AIAudit...)    │  │
-│  └──────────────┘    └──────────────────┬───────────────────────┘  │
-│                                         │                           │
-│  ┌────────────────────────────────────┐ │ ┌──────────────────────┐ │
-│  │       Consensus Engine             │ │ │   CLVM (VM Layer)    │ │
-│  │  PoW │ PoS │ DPoS │ PBFT           │◀┘ │  Smart Contracts     │ │
-│  └────────────────────────────────────┘   └──────────────────────┘ │
-│                                                                     │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                     Storage Layer                           │   │
-│  │         MongoDB (Blocks) · Redis (Cache/State)              │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          CipherLedger Node                              │
+│                                                                         │
+│  ┌──────────────┐    ┌──────────────────────────────────────────────┐  │
+│  │  REST / WS   │───▶│                 API Layer                    │  │
+│  │    API       │    │  AuthController · BlockchainController        │  │
+│  └──────────────┘    │  TransactionController · NFTController        │  │
+│                      │  AIAuditController · WalletController         │  │
+│  ┌──────────────┐    └─────────────────────┬────────────────────────┘  │
+│  │  P2P Network │                          │                            │
+│  │  P2PServer   │───▶ ┌────────────────────▼────────────────────────┐  │
+│  │  P2PClient   │     │             Service Layer                    │  │
+│  │  Peer Disco. │     │  BlockchainService · MiningOrchestrator      │  │
+│  └──────────────┘     │  TokenEngine · NFTEngine · AIEngineService   │  │
+│                       └──────────┬──────────────────┬───────────────┘  │
+│                                  │                  │                   │
+│  ┌───────────────────────────────▼──┐  ┌────────────▼──────────────┐  │
+│  │       Consensus Engine           │  │   CLVM (Smart Contracts)  │  │
+│  │  PoW │ PoS │ DPoS │ PBFT         │  │  Opcodes · Gas · Events   │  │
+│  │  ValidatorRegistry               │  │  Sandboxed Execution      │  │
+│  └───────────────────────────────┬──┘  └──────────────┬────────────┘  │
+│                                  │                     │               │
+│  ┌───────────────────────────────▼─────────────────────▼───────────┐  │
+│  │                       Storage Layer                              │  │
+│  │     MongoDB (Blocks · Contracts · NFTs)   Redis (Cache/State)   │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+        ↑                                                  ↑
+ React UI + WS                                     Java SDK / JS SDK
+ (Block Explorer)                                  (External Clients)
 ```
 
 <br/>
@@ -172,70 +241,73 @@ Fungible tokens and NFTs are **first-class citizens at the protocol level** — 
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### ✅ Prerequisites
 
-Ensure you have the following installed:
-- **Java 21+** — [Download](https://adoptium.net/)
-- **Maven 3.8+** — [Download](https://maven.apache.org/download.cgi)
-- **Node.js 18+** — [Download](https://nodejs.org/)
-- **Docker & Docker Compose** — [Download](https://www.docker.com/products/docker-desktop)
+| Tool | Version | Download |
+|:---:|:---:|:---:|
+| ☕ Java JDK | 21+ | [Adoptium](https://adoptium.net/) |
+| 📦 Maven | 3.8+ | [maven.apache.org](https://maven.apache.org/) |
+| 🟢 Node.js | 18+ | [nodejs.org](https://nodejs.org/) |
+| 🐳 Docker | Latest | [docker.com](https://www.docker.com/) |
 
 <br/>
 
-### Option 1 — Run with Docker (Recommended)
+### 🐳 Option 1 — Docker (Recommended)
 
-The fastest way to get a full environment up:
+The fastest way to get a full environment running:
 
 ```bash
 # Clone the repository
 git clone https://github.com/Het-2004/CipherLedger.git
 cd CipherLedger
 
-# Start a full multi-node network + monitoring stack
-docker-compose -f docker-compose.multi-node.yml -f docker-compose.monitoring.yml up -d
+# Launch multi-node network + full monitoring stack
+docker-compose -f docker-compose.multi-node.yml \
+               -f docker-compose.monitoring.yml up -d
 ```
 
-> **Access Points:**
-> - 🌐 UI Explorer: `http://localhost:5173`
-> - 🔗 Node API: `http://localhost:8080`
-> - 📊 Grafana: `http://localhost:3000`
+| Service | URL |
+|:---|:---|
+| 🌐 UI Explorer | http://localhost:5173 |
+| 🔗 Node REST API | http://localhost:8080 |
+| 📊 Grafana | http://localhost:3000 |
+| 📈 Prometheus | http://localhost:9090 |
 
 <br/>
 
-### Option 2 — Run Locally (Development)
+### 💻 Option 2 — Local Development
 
-**Step 1: Start the Backend Node**
+**Backend Node:**
 ```bash
-# Build the project
+# Build all modules
 mvn clean install -DskipTests
 
-# Run the Spring Boot node
+# Start the Spring Boot blockchain node
 mvn spring-boot:run
 ```
 
-**Step 2: Start the Frontend UI**
+**Frontend Explorer:**
 ```bash
 cd cipherledger-ui
 npm install
 npm run dev
+# → http://localhost:5173 ✅
 ```
-
-The UI will be live at `http://localhost:5173` ✅
 
 <br/>
 
-### Option 3 — Kubernetes Deployment
+### ⎈ Option 3 — Kubernetes
 
 ```bash
-# Apply database services
+# Deploy databases
 kubectl apply -f k8s/redis-mongodb-deployment.yaml
 
-# Apply the CipherLedger node deployment
+# Deploy CipherLedger node
 kubectl apply -f k8s/cipherledger-deployment.yaml
 kubectl apply -f k8s/cipherledger-service.yaml
 ```
 
-For a full K8s guide, see **[Deployment Docs →](docs/deployment.md)**
+📖 Full guide → **[Deployment Docs](docs/deployment.md)**
 
 <br/>
 
@@ -243,41 +315,44 @@ For a full K8s guide, see **[Deployment Docs →](docs/deployment.md)**
 
 ## 🌐 API Reference
 
-All API calls require a JWT Bearer token obtained from `POST /api/auth/login`.
+> All endpoints require `Authorization: Bearer <JWT>` — obtain from `POST /api/auth/login`
 
-### Key Endpoints
+### 🔑 Auth & Wallet
 
 | Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/auth/login` | Authenticate and get JWT |
-| `POST` | `/api/wallet/create` | Generate a new wallet |
-| `GET` | `/api/wallet/balance/{address}` | Get UTXO balance |
+|:---:|:---|:---|
+| `POST` | `/api/auth/login` | Authenticate, receive JWT token |
+| `POST` | `/api/wallet/create` | Generate new wallet keypair |
+| `GET` | `/api/wallet/balance/{address}` | Fetch UTXO balance |
+
+### ⛓️ Blockchain
+
+| Method | Endpoint | Description |
+|:---:|:---|:---|
+| `GET` | `/api/blockchain/blocks` | List latest blocks |
+| `GET` | `/api/blockchain/block/{hash}` | Fetch block by hash |
 | `POST` | `/api/transaction/send` | Submit a signed transaction |
-| `GET` | `/api/blockchain/blocks` | Get latest blocks |
-| `GET` | `/api/blockchain/block/{hash}` | Get block by hash |
+| `GET` | `/api/transaction/{txId}` | Transaction status lookup |
+
+### 💻 Smart Contracts
+
+| Method | Endpoint | Description |
+|:---:|:---|:---|
 | `POST` | `/api/contract/deploy` | Deploy CLVM bytecode |
-| `POST` | `/api/contract/invoke` | Invoke smart contract |
+| `POST` | `/api/contract/invoke` | Invoke contract function |
+
+### 🎨 NFTs & Tokens
+
+| Method | Endpoint | Description |
+|:---:|:---|:---|
 | `GET` | `/api/nft/collections` | List all NFT collections |
 | `POST` | `/api/nft/mint` | Mint a new NFT |
+| `POST` | `/api/token/create` | Issue a new fungible token |
 
-📖 **Full API Reference → [docs/api_reference.md](docs/api_reference.md)**
+### 📡 WebSocket
+Connect to `ws://localhost:8080/ws/blocks` for **real-time block streaming**.
 
-**WebSocket**: Connect to `ws://localhost:8080/ws/blocks` for real-time block events.
-
-<br/>
-
----
-
-## 📚 Documentation
-
-| Document | Description |
-|---|---|
-| [🏛 Architecture](docs/architecture.md) | Core system design, data flow & component roles |
-| [⚖️ Consensus](docs/consensus.md) | PoW, PoS, DPoS, PBFT deep-dive |
-| [💻 Smart Contracts & CLVM](docs/smart_contracts.md) | VM opcodes, gas, contract lifecycle |
-| [🎨 Tokens & NFTs](docs/nfts_and_tokens.md) | Token issuance, NFT minting & marketplace |
-| [🚢 Deployment](docs/deployment.md) | Docker, Kubernetes & monitoring setup |
-| [🌐 API Reference](docs/api_reference.md) | Complete REST & WebSocket endpoint reference |
+📖 Full Reference → **[docs/api_reference.md](docs/api_reference.md)**
 
 <br/>
 
@@ -287,32 +362,52 @@ All API calls require a JWT Bearer token obtained from `POST /api/auth/login`.
 
 ```
 CipherLedger/
-├── src/main/java/com/het/cipherledger/
-│   ├── api/              # REST Controllers (Blockchain, Auth, NFT, AI Audit...)
-│   ├── blockchain/       # Core Blockchain, Validator, Genesis Block
-│   ├── consensus/        # PoW, PoS, DPoS, PBFT engines
-│   ├── contract/         # Smart Contract Engine
-│   ├── crypto/           # SHA-256, ECDSA, Merkle Tree, Base58, JWT
-│   ├── mining/           # Miner, ProofOfWork, Difficulty adjustment
-│   ├── model/            # Block, Transaction, UTXO, Token, NFT, User
-│   ├── network/          # P2PServer, P2PClient, Peer discovery
-│   ├── security/         # Spring Security Config, JWT Filter
-│   ├── service/          # Business logic (Blockchain, NFT, AI, Token...)
-│   ├── storage/          # Pluggable storage layer
-│   ├── transaction/      # Pool, Processor, Validator
-│   ├── vm/               # CLVM (CipherLedger Virtual Machine)
-│   ├── wallet/           # Wallet, WalletManager, WalletService
-│   └── websocket/        # Real-time block streaming
 │
-├── cipherledger-ui/      # React 18 Block Explorer & Dashboard
-├── cipherledger-java-sdk/ # Official Java SDK
-├── cipherledger-js-sdk/  # Official JavaScript SDK
-├── cipherledger-wallet-extension/ # Browser Wallet Extension
-├── k8s/                  # Kubernetes manifests
-├── config/               # Prometheus & monitoring config
-├── docs/                 # 📚 Detailed documentation
-└── docker-compose*.yml   # Docker environment configs
+├── 📁 src/main/java/com/het/cipherledger/
+│   ├── 🌐 api/              # REST Controllers (Auth, Blockchain, NFT, AI Audit...)
+│   ├── ⛓️  blockchain/       # Core chain, Validator, Genesis Block
+│   ├── ⚖️  consensus/        # PoW, PoS, DPoS, PBFT engines + ValidatorRegistry
+│   ├── 📜 contract/         # Smart Contract engine
+│   ├── 🔐 crypto/           # SHA-256, ECDSA, Merkle Tree, Base58, JWT
+│   ├── ⛏️  mining/           # Miner, ProofOfWork, Difficulty adjustment
+│   ├── 🧱 model/            # Block, Transaction, UTXO, Token, NFT, User
+│   ├── 🌍 network/          # P2PServer, P2PClient, Peer discovery
+│   ├── 🛡️  security/         # Spring Security Config, JWT Filter
+│   ├── ⚙️  service/          # Business logic (Blockchain, NFT, AI, Token...)
+│   ├── 💾 storage/          # Pluggable storage interface
+│   ├── 💸 transaction/      # Pool, Processor, Validator
+│   ├── 🖥️  vm/               # CLVM — CipherLedger Virtual Machine
+│   ├── 👛 wallet/           # Wallet, WalletManager, WalletService
+│   └── 📡 websocket/        # Real-time block streaming
+│
+├── ⚛️  cipherledger-ui/      # React 18 Block Explorer & Enterprise Dashboard
+├── ☕ cipherledger-java-sdk/ # Official Java SDK
+├── 🟨 cipherledger-js-sdk/  # Official JavaScript SDK
+├── 🌐 cipherledger-wallet-extension/ # Browser Wallet Extension
+├── ⎈  k8s/                  # Kubernetes deployment manifests
+├── 📊 config/               # Prometheus & Grafana monitoring config
+├── 📚 docs/                 # Comprehensive technical documentation
+└── 🐳 docker-compose*.yml   # Docker environment configurations
 ```
+
+<br/>
+
+---
+
+## 📚 Documentation
+
+<div align="center">
+
+| 📄 Document | 📝 Description |
+|:---|:---|
+| [🏛 Architecture](docs/architecture.md) | System design, data flow & component roles |
+| [⚖️ Consensus](docs/consensus.md) | PoW, PoS, DPoS, PBFT — deep technical dive |
+| [💻 Smart Contracts & CLVM](docs/smart_contracts.md) | VM opcodes, gas model, contract lifecycle |
+| [🎨 Tokens & NFTs](docs/nfts_and_tokens.md) | Token issuance, NFT minting & marketplace protocol |
+| [🚢 Deployment](docs/deployment.md) | Docker Compose, Kubernetes & monitoring setup |
+| [🌐 API Reference](docs/api_reference.md) | Complete REST & WebSocket endpoint reference |
+
+</div>
 
 <br/>
 
@@ -320,15 +415,26 @@ CipherLedger/
 
 ## 🤝 Contributing
 
-Contributions are what make open source amazing! Here's how to get started:
+Contributions make open source great! Here's how to get involved:
 
-1. **Fork** the repository
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'feat: add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a **Pull Request**
+```bash
+# 1. Fork the repo and clone it
+git clone https://github.com/YOUR_USERNAME/CipherLedger.git
 
-Please ensure all tests pass before submitting: `mvn test`
+# 2. Create a feature branch
+git checkout -b feature/your-amazing-feature
+
+# 3. Make changes, then run all tests
+mvn test
+
+# 4. Commit with a descriptive message
+git commit -m "feat: add your amazing feature"
+
+# 5. Push and open a Pull Request
+git push origin feature/your-amazing-feature
+```
+
+Please follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
 
 <br/>
 
@@ -336,9 +442,7 @@ Please ensure all tests pass before submitting: `mvn test`
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
-<br/>
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for full details.
 
 ---
 
@@ -346,10 +450,27 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 <br/>
 
-**Built with ❤️ by [Het](https://github.com/Het-2004)**
+**Built with ❤️ & ☕ by [Het Patel](https://github.com/Het-2004)**
 
 <br/>
 
-*⭐ Star this repo if you find it useful — it really helps!*
+<a href="https://github.com/Het-2004/CipherLedger/stargazers">
+  <img src="https://img.shields.io/github/stars/Het-2004/CipherLedger?style=social" alt="Stars"/>
+</a>
+&ensp;
+<a href="https://github.com/Het-2004/CipherLedger/network/members">
+  <img src="https://img.shields.io/github/forks/Het-2004/CipherLedger?style=social" alt="Forks"/>
+</a>
+&ensp;
+<a href="https://github.com/Het-2004/CipherLedger/issues">
+  <img src="https://img.shields.io/github/issues/Het-2004/CipherLedger?style=social" alt="Issues"/>
+</a>
+
+<br/>
+<br/>
+
+⭐ **If CipherLedger helped you, please consider giving it a star — it means a lot!** ⭐
+
+<br/>
 
 </div>
