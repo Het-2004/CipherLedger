@@ -1,0 +1,165 @@
+:root {
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --success: #10b981;
+    --error: #ef4444;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    width: 320px;
+    height: 400px;
+}
+
+.wallet-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.network-status {
+    font-size: 11px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.account-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.balance {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.ticker {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.address {
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: rgba(0,0,0,0.2);
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.address:hover {
+    color: var(--text-primary);
+    background: rgba(0,0,0,0.4);
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    flex: 1;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+button.secondary {
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+}
+
+button.secondary:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-primary);
+}
+
+.send-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-card);
+    padding: 16px;
+    border-radius: 12px;
+}
+
+input {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
+}
+
+#txStatus {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 8px;
+}

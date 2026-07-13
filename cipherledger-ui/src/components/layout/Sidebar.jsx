@@ -9,7 +9,9 @@ import {
   Terminal,
   Activity,
   FileText,
-  Key
+  Key,
+  Search,
+  ShieldAlert
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -37,6 +39,11 @@ export default function Sidebar() {
       icon: <Pickaxe className="w-5 h-5" />,
     },
     {
+      name: "Explorer",
+      url: "/explorer",
+      icon: <Search className="w-5 h-5" />,
+    },
+    {
       name: "Hardware Wallet",
       url: "/wallet",
       icon: <Wallet className="w-5 h-5" />,
@@ -51,6 +58,26 @@ export default function Sidebar() {
       url: "/crypto-playground",
       icon: <Key className="w-5 h-5" />,
     },
+    {
+      name: "Smart Contracts",
+      url: "/contracts",
+      icon: <FileText className="w-5 h-5" />,
+    },
+    {
+      name: "Token Engine",
+      url: "/tokens",
+      icon: <Activity className="w-5 h-5" />,
+    },
+    {
+      name: "NFT Platform",
+      url: "/nfts",
+      icon: <Network className="w-5 h-5" />,
+    },
+    {
+      name: "AI & Enterprise SIEM",
+      url: "/enterprise",
+      icon: <ShieldAlert className="w-5 h-5" />,
+    },
   ];
 
 
@@ -58,9 +85,9 @@ export default function Sidebar() {
     <div
       className="w-72 shrink-0 min-h-screen bg-slate-950 border-r border-white/5 p-6 flex flex-col justify-between select-none relative z-20"
     >
-      <div>
+      <div className="flex-1 flex flex-col min-h-0">
         {/* Branding Title */}
-        <div className="flex items-center gap-3 mb-10 pl-2">
+        <div className="flex items-center gap-3 mb-10 pl-2 shrink-0">
           <div className="w-10 h-10 rounded-xl bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.15)] animate-pulse-slow">
             <Terminal className="text-cyber-cyan w-5 h-5" />
           </div>
@@ -71,7 +98,7 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation links */}
-        <nav className="space-y-1.5">
+        <nav className="space-y-1.5 flex-1 overflow-y-auto pr-2 pb-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           {links.map((item) => {
             const isActive = location.pathname === item.url;
             return (

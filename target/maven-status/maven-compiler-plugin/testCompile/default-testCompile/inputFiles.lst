@@ -2,6 +2,8 @@ D:\Project\CipherLedger\src\test\java\com\het\cipherledger\BlockchainTest.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\BlockTest.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\consensus\ConsensusTests.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\ContractEngineTest.java
+D:\Project\CipherLedger\src\test\java\com\het\cipherledger\nft\NFTEngineTest.java
+D:\Project\CipherLedger\src\test\java\com\het\cipherledger\nft\NFTMarketplaceTest.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\TokenEngineTest.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\TransactionTest.java
 D:\Project\CipherLedger\src\test\java\com\het\cipherledger\vm\CLVMTest.java

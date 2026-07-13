@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: cipher_mongo
+    ports:
+      - "27017:27017"
+
+  seed-node:
+    build: .
+    container_name: cipher_seed
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger
+      - SERVER_PORT=8080
+      - CIPHERLEDGER_P2P_PORT=9000
+    ports:
+      - "8080:8080"
+      - "9000:9000"
+
+  miner-1:
+    build: .
+    container_name: cipher_miner_1
+    depends_on:
+      - seed-node
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger_miner1
+      - SERVER_PORT=8081
+      - CIPHERLEDGER_P2P_PORT=9001
+      - CIPHERLEDGER_P2P_SEEDS=seed-node:9000
+    ports:
+      - "8081:8081"
+      - "9001:9001"
+
+  miner-2:
+    build: .
+    container_name: cipher_miner_2
+    depends_on:
+      - seed-node
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/cipherledger_miner2
+      - SERVER_PORT=8082
+      - CIPHERLEDGER_P2P_PORT=9002
+      - CIPHERLEDGER_P2P_SEEDS=seed-node:9000
+    ports:
+      - "8082:8082"
+      - "9002:9002"

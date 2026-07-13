@@ -8,6 +8,11 @@ import Transactions from "../pages/Transactions";
 import Nodes from "../pages/Nodes";
 import Login from "../pages/Login";
 import CryptoPlayground from "../pages/CryptoPlayground";
+import Contracts from "../pages/Contracts";
+import Tokens from "../pages/Tokens";
+import NFTs from "../pages/NFTs";
+import Explorer from "../pages/Explorer";
+import EnterpriseDashboard from "../pages/EnterpriseDashboard";
 import { Toaster } from "react-hot-toast";
 
 export default function AppRoutes() {
@@ -23,6 +28,11 @@ export default function AppRoutes() {
           <Route path="/nodes" element={<Nodes />} />
           <Route path="/crypto-playground" element={<CryptoPlayground />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/contracts" element={<Contracts />} />
+          <Route path="/tokens" element={<Tokens />} />
+          <Route path="/nfts" element={<NFTs />} />
+          <Route path="/explorer" element={<Explorer />} />
+          <Route path="/enterprise" element={<EnterpriseDashboard />} />
         </Routes>
       </Layout>
       <Toaster

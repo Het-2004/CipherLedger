@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherLedger Wallet</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="wallet-container">
+        <header>
+            <div class="logo">CL</div>
+            <h2>CipherLedger</h2>
+            <div class="network-status">Local Node</div>
+        </header>
+        
+        <div class="account-card">
+            <div class="balance">
+                <span id="cldBalance">0.00</span> <span class="ticker">CLD</span>
+            </div>
+            <div class="address" id="walletAddress" title="Click to copy">
+                Loading...
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="sendBtn">Send</button>
+            <button id="refreshBtn">Refresh</button>
+        </div>
+
+        <div class="send-form" id="sendForm" style="display: none;">
+            <input type="text" id="recipientInput" placeholder="Recipient Address" />
+            <input type="number" id="amountInput" placeholder="Amount" step="0.01" />
+            <div class="form-actions">
+                <button id="cancelSendBtn" class="secondary">Cancel</button>
+                <button id="confirmSendBtn" class="primary">Confirm</button>
+            </div>
+            <div id="txStatus"></div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cipherledger-node
+  labels:
+    app: cipherledger
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cipherledger
+  template:
+    metadata:
+      labels:
+        app: cipherledger
+    spec:
+      containers:
+      - name: cipherledger
+        image: cipherledger:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        - containerPort: 9000
+        env:
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://mongodb:27017/cipherledger"
+        - name: SPRING_DATA_REDIS_HOST
+          value: "redis"
