@@ -71,6 +71,7 @@ public class CosmosIbcService {
         result.put("packetId", packetId);
         result.put("sequence", seq);
         result.put("status", "ACKNOWLEDGED");
+        result.put("data", data);
         result.put("channel", channel);
         return result;
     }

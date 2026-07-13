@@ -772,14 +772,24 @@ export default function EnterpriseDashboard() {
                 {/* Multi-Sig Proposer */}
                 <div className="bg-slate-900/60 border border-white/5 rounded-xl p-5 space-y-4">
                   <div className="text-xs font-mono text-slate-400 border-b border-white/5 pb-2 uppercase tracking-wider">2-of-3 Multi-Sig Validator</div>
-                  <div className="space-y-3">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Recipient Address:</span>
-                      <span className="font-mono text-slate-200">{multisigRecipient}</span>
+                  <div className="space-y-3 text-xs font-mono">
+                    <div>
+                      <label className="block text-slate-500 mb-1">Recipient Address</label>
+                      <input 
+                        type="text" 
+                        value={multisigRecipient} 
+                        onChange={(e) => setMultisigRecipient(e.target.value)} 
+                        className="w-full bg-black/55 border border-white/10 rounded-lg py-2 px-3 text-slate-200"
+                      />
                     </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Amount Proposed:</span>
-                      <span className="font-mono text-slate-200">{multisigAmount} CL</span>
+                    <div>
+                      <label className="block text-slate-500 mb-1">Amount Proposed (CL)</label>
+                      <input 
+                        type="number" 
+                        value={multisigAmount} 
+                        onChange={(e) => setMultisigAmount(parseFloat(e.target.value) || 0)} 
+                        className="w-full bg-black/55 border border-white/10 rounded-lg py-2 px-3 text-slate-200"
+                      />
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-400">Proposals Collected:</span>
