@@ -4,7 +4,7 @@ export default function BrandMark({
   showText = true,
   size = "md",
   className = "",
-  iconSrc = "/cipherledger-logo.png",
+  iconSrc = "/logo.png",
 }) {
   const iconSize = size === "sm" ? "w-10 h-10" : size === "lg" ? "w-16 h-16" : "w-12 h-12";
   const titleClass = size === "sm" ? "text-sm" : size === "lg" ? "text-2xl" : "text-lg";
