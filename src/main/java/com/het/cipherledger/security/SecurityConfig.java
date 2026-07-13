@@ -32,9 +32,9 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // OpenAPI
                 .requestMatchers("/actuator/**").permitAll() // Monitoring
                 .requestMatchers("/api/transactions/estimate").permitAll()
+                .requestMatchers("/api/ai/**").permitAll()
                 // Secure endpoints
                 .requestMatchers("/api/transactions").authenticated()
-                .requestMatchers("/api/ai/**").authenticated()
                 .anyRequest().permitAll() // Allow other endpoints for ease of development, normally this would be authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
