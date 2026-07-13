@@ -13,6 +13,7 @@ import Tokens from "../pages/Tokens";
 import NFTs from "../pages/NFTs";
 import Explorer from "../pages/Explorer";
 import EnterpriseDashboard from "../pages/EnterpriseDashboard";
+import AiDashboard from "../pages/AiDashboard";
 import { Toaster } from "react-hot-toast";
 
 export default function AppRoutes() {
@@ -33,6 +34,7 @@ export default function AppRoutes() {
           <Route path="/nfts" element={<NFTs />} />
           <Route path="/explorer" element={<Explorer />} />
           <Route path="/enterprise" element={<EnterpriseDashboard />} />
+          <Route path="/ai-platform" element={<AiDashboard />} />
         </Routes>
       </Layout>
       <Toaster

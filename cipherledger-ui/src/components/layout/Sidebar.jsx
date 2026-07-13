@@ -9,7 +9,8 @@ import {
   FileText,
   Key,
   Search,
-  ShieldAlert
+  ShieldAlert,
+  Bot
 } from "lucide-react";
 import BrandMark from "../brand/BrandMark";
 
@@ -76,6 +77,11 @@ export default function Sidebar() {
       name: "AI & Enterprise SIEM",
       url: "/enterprise",
       icon: <ShieldAlert className="w-5 h-5" />,
+    },
+    {
+      name: "AI Blockchain Hub",
+      url: "/ai-platform",
+      icon: <Bot className="w-5 h-5" />,
     },
   ];
 
