@@ -4,7 +4,6 @@ import com.het.cipherledger.contract.ContractEngine;
 import com.het.cipherledger.contract.SmartContract;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ContractEngineTest {

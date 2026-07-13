@@ -29,7 +29,7 @@ public class DelegatedPoSEngine implements ConsensusEngine {
         List<String> topDelegates = votingPower.entrySet().stream()
                 .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
                 .limit(MAX_DELEGATES)
-                .map(Map.Entry::getKey)
+                .map(entry -> entry.getKey())
                 .collect(Collectors.toList());
 
         // In a real DPoS system, these top delegates take turns in a round-robin schedule.

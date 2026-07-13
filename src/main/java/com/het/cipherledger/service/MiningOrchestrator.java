@@ -42,7 +42,7 @@ public class MiningOrchestrator {
                 repository.findAll()
                         .stream()
                         .reduce((a, b) -> b)
-                        .map(Block::getHash)
+                        .map(b -> b.getHash())
                         .orElse("GENESIS");
 
         // Prepare block transactions based on gas fee

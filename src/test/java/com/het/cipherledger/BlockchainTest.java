@@ -17,7 +17,6 @@ public class BlockchainTest {
         WalletManager manager = new WalletManager();
         Wallet sender = manager.createWallet();
         Wallet receiver = manager.createWallet();
-        Wallet miner = manager.createWallet();
 
         Transaction transaction = new Transaction(sender.getAddress(), receiver.getAddress(), 100, 0.00001, 21000);
         transaction.generateSignature(sender.getPrivateKey());

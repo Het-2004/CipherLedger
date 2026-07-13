@@ -7,6 +7,7 @@ import com.het.cipherledger.websocket.BlockSocketService;
 import org.springframework.stereotype.Service;
 
 @Service
+@SuppressWarnings("null")
 public class MiningService {
 
     private final BlockRepository repository;

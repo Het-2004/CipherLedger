@@ -24,7 +24,7 @@ public class ProofOfStakeEngine implements ConsensusEngine {
         Map<String, Double> stakes = registry.getAllStakes();
         if (stakes.isEmpty()) return true; // Bootstrap mode
 
-        double totalStake = stakes.values().stream().mapToDouble(Double::doubleValue).sum();
+        double totalStake = stakes.values().stream().mapToDouble(val -> val).sum();
         double myStake = registry.getStake(nodeAddress);
 
         // Probability of producing block is proportional to stake

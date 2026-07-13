@@ -107,6 +107,7 @@ public class P2PServer {
                 
             case RES_CHAIN:
                 // We received a chain, handle fork resolution / chain selection
+                @SuppressWarnings("unchecked")
                 List<Block> remoteChain = (List<Block>) message.getPayload();
                 blockchainService.resolveForks(remoteChain);
                 break;

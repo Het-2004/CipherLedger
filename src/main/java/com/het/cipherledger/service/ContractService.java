@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@SuppressWarnings("null")
 public class ContractService {
 
     private final ContractRepository contractRepository;

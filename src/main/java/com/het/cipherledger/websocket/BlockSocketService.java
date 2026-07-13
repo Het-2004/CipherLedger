@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@SuppressWarnings("null")
 public class BlockSocketService {
 
     private final SimpMessagingTemplate template;
