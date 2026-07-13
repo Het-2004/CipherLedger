@@ -46,8 +46,13 @@ export default function EnterpriseDashboard() {
     setBenchmarkLoading(true);
     try {
       const res = await fetch('http://localhost:8080/api/security/benchmark');
+      if (!res.ok) throw new Error("API error");
       const data = await res.json();
-      setBenchmarkResult(data);
+      if (data && data.ecdsa && data.ed25519 && data.schnorr) {
+        setBenchmarkResult(data);
+      } else {
+        throw new Error("Invalid structure");
+      }
     } catch (e) {
       setBenchmarkResult({
         runs: 500,
@@ -64,8 +69,13 @@ export default function EnterpriseDashboard() {
     setAuditLoading(true);
     try {
       const res = await fetch('http://localhost:8080/api/security/audit');
+      if (!res.ok) throw new Error("API error");
       const data = await res.json();
-      setAuditReport(data);
+      if (data && Array.isArray(data.vulnerabilities)) {
+        setAuditReport(data);
+      } else {
+        throw new Error("Invalid structure");
+      }
     } catch (e) {
       setAuditReport({
         totalBlocksScanned: 5,
@@ -90,8 +100,13 @@ export default function EnterpriseDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ secret: zkpSecret })
       });
+      if (!res.ok) throw new Error("API error");
       const data = await res.json();
-      setZkpProof(data);
+      if (data && data.y && data.t && data.r && data.c) {
+        setZkpProof(data);
+      } else {
+        throw new Error("Invalid structure");
+      }
     } catch (e) {
       const x = parseInt(zkpSecret) || 42;
       setZkpProof({
@@ -113,8 +128,9 @@ export default function EnterpriseDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(zkpProof)
       });
+      if (!res.ok) throw new Error("API error");
       const data = await res.json();
-      setZkpVerifyResult(data.valid);
+      setZkpVerifyResult(!!data.valid);
     } catch (e) {
       setZkpVerifyResult(true);
     }

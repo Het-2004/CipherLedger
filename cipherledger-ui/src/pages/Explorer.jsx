@@ -49,8 +49,17 @@ export default function Explorer() {
   useEffect(() => {
     const fetchOraclesAndIbc = () => {
       fetch('http://localhost:8080/api/crosschain/oracle/prices')
-        .then(res => res.json())
-        .then(data => setOraclePrices(data))
+        .then(res => {
+          if (!res.ok) throw new Error("API error");
+          return res.json();
+        })
+        .then(data => {
+          if (data && data["CL/USD"]) {
+            setOraclePrices(data);
+          } else {
+            throw new Error("Invalid structure");
+          }
+        })
         .catch(() => {
           // Fallback static oracle simulation if backend is offline
           setOraclePrices({
@@ -61,8 +70,17 @@ export default function Explorer() {
         });
 
       fetch('http://localhost:8080/api/crosschain/ibc/channels')
-        .then(res => res.json())
-        .then(data => setIbcChannels(data))
+        .then(res => {
+          if (!res.ok) throw new Error("API error");
+          return res.json();
+        })
+        .then(data => {
+          if (Array.isArray(data)) {
+            setIbcChannels(data);
+          } else {
+            throw new Error("Not an array");
+          }
+        })
         .catch(() => {
           setIbcChannels([
             { channelId: 'channel-0', destChain: 'Cosmos Hub', status: 'OPEN', packetsRelayed: 124 },
@@ -72,8 +90,15 @@ export default function Explorer() {
         });
 
       fetch('http://localhost:8080/api/crosschain/ibc/packets')
-        .then(res => res.json())
-        .then(data => setIbcPackets(data))
+        .then(res => {
+          if (!res.ok) throw new Error("API error");
+          return res.json();
+        })
+        .then(data => {
+          if (Array.isArray(data)) {
+            setIbcPackets(data);
+          }
+        })
         .catch(() => {});
     };
 
