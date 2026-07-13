@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/transactions")
+@CrossOrigin(origins = "*")
 public class TransactionController {
 
     private static final List<Transaction> transactionPool = new ArrayList<>();

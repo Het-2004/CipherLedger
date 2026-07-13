@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/mining")
+@CrossOrigin(origins = "*")
 public class MiningController {
 
     private final BlockchainService service;

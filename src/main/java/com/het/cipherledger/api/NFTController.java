@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/nft")
+@CrossOrigin(origins = "*")
 public class NFTController {
 
     private final NFTEngine nftEngine;
